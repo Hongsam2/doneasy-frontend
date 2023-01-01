@@ -1,5 +1,6 @@
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
+import Contents from "./Contents";
 
 
 function Table() {
@@ -7,13 +8,8 @@ function Table() {
         <>
             <div>
                 <Header />
-
-                <div className="mx-auto">contents</div>
-                <hr className="hidden"></hr>
-
-                
+                <Contents />
                 <Footer />
-                
             </div>
         </>
     );

@@ -6,11 +6,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'fundrasing-color': '#dc287c',
+      },
       spacing: {
+        '01': '1px',
         '70': '70px',
         '90': '90px',
         '100': '100px',
         '300': '300px',
+        '350': '350px',
         '620': '620px',
         '700': '700px',
       },
@@ -19,6 +24,13 @@ module.exports = {
         'dog-shelter1': "url('/public/img/dog-shelter2.jpg')",
         'dog-shelter2': "url('/public/img/dog-shelter.jpg')",
         'dog-shelter3': "url('/public/img/dog-shelter3.jpg')"
+      },
+      lineHeight: {
+        '60': '60px',
+        '80': '80px',
+      },
+      zIndex: {
+        '100': '100',
       },
     },
   },

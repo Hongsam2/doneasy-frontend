@@ -1,12 +1,12 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Table from './routes/Table';
+import Contents from './routes/Contents';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={'/'} element={<Table/>}/>
+        <Route path={'/'} element={<Contents/>}/>
       </Routes>
     </BrowserRouter>
   );

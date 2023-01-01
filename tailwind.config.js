@@ -12,6 +12,13 @@ module.exports = {
         '100': '100px',
         '300': '300px',
         '620': '620px',
+        '700': '700px',
+      },
+      backgroundImage : {
+        'test-img': "url('/public/img/abandoned-dog-shelter.jpg')",
+        'dog-shelter1': "url('/public/img/dog-shelter2.jpg')",
+        'dog-shelter2': "url('/public/img/dog-shelter.jpg')",
+        'dog-shelter3': "url('/public/img/dog-shelter3.jpg')"
       },
     },
   },

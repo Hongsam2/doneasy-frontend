@@ -99,11 +99,19 @@ return (
                                 <span className="block w-620 max-h-14 mt-0 m-auto pt-2 text-sm text-white opacity-60">agency-data</span>
                             </div>
                         </div>
-                        {/*<div className="w-full h-full bg-cover bg-[#3b3820]" style="background-image: url('${imgSrc}/for-test/${content.image0}');"></div>*/}
+                        <div className="w-full h-full bg-cover bg-[#3b3820] bg-test-img"></div>
                     </div>
                     {/* Body Content */}
-                    <div>
-
+                    <div className="relative">
+                        <div className="w-700 mt-0 m-auto">
+                            <span className="mt-12 block text-xl text-slate-900 break-all">contents-title-data</span>
+                            <span className="block mt-4 m-auto text-base leading-7 text-slate-700 whitespace-pre-line break-all">
+                                <p>
+                                    contents-contents-data
+                                </p>
+                            </span>
+                            <span className="block h-96 bg-no-repeat bg-center bg-cover bg-dog-shelter1">contents-img-data</span>
+                        </div>
                     </div>
                     {/* 수정하기 Btn */}
                     <div>

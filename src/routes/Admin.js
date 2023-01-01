@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
-import Notice from '../components/Notice';
-import Project from '../components/Project';
-import Comment from '../components/Comment';
-import Campaign from '../components/Campaign';
+import Notice from './Notice';
+import Project from './Project';
+import Comment from './Comment';
+import Campaign from './Campaign';
 
 function Admin() {
     const [page, setPage] = useState('');

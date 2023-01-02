@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function Content({ i, changeContent, deleteContent }) {
-    const [index, setIndex] = useState(0);
+function Content({ index, changeContent, deleteContent }) {
     const [subtitle, setSubtitle] = useState('');
     const [image, setImage] = useState('');
     const [content, setContent] = useState('');
@@ -9,16 +8,18 @@ function Content({ i, changeContent, deleteContent }) {
     const [context, setContext] = useState({});
 
     useEffect(() => {
-        setIndex(i);
+        console.log('my index');
+        console.log(index);
+        changeContent(context, index);
     }, []);
 
     useEffect(() => {
-        setContext({ subtitle, image, content });
-    }, [subtitle, image, content]);
+        setContext({ subtitle, image, content, index });
+    }, [subtitle, image, content, index]);
 
     useEffect(() => {
         changeContent(context, index);
-    }, [context]);
+    }, [context, index]);
 
     const onSubtitleChange = (e) => {
         setSubtitle(e.target.value);
@@ -45,17 +46,17 @@ function Content({ i, changeContent, deleteContent }) {
     };
     return (
         <>
-            <div className="bg-gray-50">
+            <div className="bg-gray-50 border-t">
                 <div>
                     <input
                         type="text"
                         placeholder="소제목"
                         value={subtitle}
                         onChange={onSubtitleChange}
-                        className="w-3/4 border rounded-md h-8 px-3 text-lg my-4 placeholder:text-center"
+                        className="w-3/4 border rounded-md h-8 px-3 text-lg my-2 placeholder:text-center"
                     />
                 </div>
-                <div className="my-4">
+                <div className="my-2">
                     {imagesrc !== '' && (
                         <img
                             src={imagesrc}
@@ -64,13 +65,13 @@ function Content({ i, changeContent, deleteContent }) {
                         />
                     )}
                     <label
-                        htmlFor="image"
-                        className="px-3 py-1.5 bg-gray-100 rounded-lg"
+                        htmlFor={`image${index}`}
+                        className="px-3 py-1.5 bg-gray-100 rounded-lg duration-150 hover:duration-150 hover:bg-gray-200"
                     >
                         이미지 선택
                     </label>
                     <input
-                        id="image"
+                        id={`image${index}`}
                         type="file"
                         accept="image/*"
                         hidden
@@ -82,7 +83,7 @@ function Content({ i, changeContent, deleteContent }) {
                         placeholder="본문"
                         value={content}
                         onChange={onContentChange}
-                        className="resize-none w-3/4 px-3 text-md h-32 my-4 border placeholder:text-center placeholder:text-xl"
+                        className="resize-none w-3/4 px-3 text-md h-32 my-2 border placeholder:text-center placeholder:text-xl"
                     />
                 </div>
                 <div className="py-2">

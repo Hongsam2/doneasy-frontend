@@ -2,60 +2,51 @@ import { useEffect, useState } from 'react';
 import Content from '../components/admin/notice/create/Content';
 import Sidebar from '../components/Sidebar';
 
-// TODO 이미지의 미리보기가 하나만 생성됨, 반복문 함수를 사용하하면 delete가 안됨
 function NoticeCreate() {
     const [title, setTitle] = useState('');
     const [index, setIndex] = useState(0);
     const [contentList, setContentList] = useState([]);
+    const [contextList, setContextList] = useState([]);
 
-    useEffect(() => {
-        const list = [...contentList];
-        setContentList(list);
-    }, [index]);
     const onTitleChange = (e) => {
         setTitle(e.target.value);
     };
     const onAddClick = () => {
-        setIndex(index + 1);
         console.log(index);
-    };
-    const renderContent = () => {
-        const result = [];
-        for (let i = 1; i < index + 1; i++) {
-            result.push(
-                <Content
-                    i={i}
-                    changeContent={changeContent}
-                    key={i}
-                    deleteContent={deleteContent}
-                />
-            );
-        }
-        return result;
+        const list = [...contentList];
+        list.push(index);
+        console.log('list');
+        console.log(list);
+        setContentList(list);
+        setIndex(index + 1);
     };
     const changeContent = (content, index) => {
         const list = [];
         for (let i = 0; i < index; i++) {
-            list.push(contentList.at(i));
-            console.log(list);
+            list.push(contextList.at(i));
         }
         list.push(content);
-        console.log(list);
         for (let i = index + 1; i < contentList.length; i++) {
-            list.push(contentList.at(i));
-            console.log(list);
+            list.push(contextList.at(i));
         }
-        setContentList(list);
+        setContextList(list);
     };
 
     const deleteContent = (index) => {
-        if (index === 0) {
-            return;
-        }
-        const list = [...contentList];
-        list.splice(index, 1);
-        setContentList(list);
-        setIndex(list.length);
+        console.log(contextList);
+        const list = [...contextList];
+        console.log('hi');
+        const removedList = list.filter((content) => {
+            return content && content.index !== index;
+        });
+        setContextList(removedList);
+        console.log('removedList');
+        console.log(removedList);
+        const numberList = [];
+        removedList.forEach((content) => {
+            numberList.push(content.index);
+        });
+        setContentList(numberList);
     };
     return (
         <>
@@ -73,12 +64,17 @@ function NoticeCreate() {
                             />
                         </div>
                         <div className="text-center mt-2">
-                            <Content
-                                i={0}
-                                changeContent={changeContent}
-                                deleteContent={deleteContent}
-                            />
-                            {renderContent()}
+                            {contentList.length >= 1 &&
+                                contentList.map((content) => {
+                                    return (
+                                        <Content
+                                            changeContent={changeContent}
+                                            deleteContent={deleteContent}
+                                            key={content}
+                                            index={content}
+                                        />
+                                    );
+                                })}
                             <div className="border-t pt-2">
                                 <button
                                     className="bg-blue-50 border rounded-lg tracking-wider px-2 py-1.5 my-4 duration-150 hover:bg-blue-200 hover:duration-150"

@@ -1,12 +1,12 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Contents from './routes/Contents';
+import Project from './routes/Project';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={'/'} element={<Contents/>}/>
+        <Route path={'/'} element={<Project/>}/>
       </Routes>
     </BrowserRouter>
   );

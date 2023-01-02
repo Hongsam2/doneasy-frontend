@@ -1,39 +1,36 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 import Comments from "../components/Comments";
+import ContentOfProject from "../components/ContentOfProject";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 
 function Contents() {
+    const [contents, setContents] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/content-of-project/get-content")
+            .then((response) => {
+                console.log(response);
+                setContents(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        
+    }, []);
 
     return (
         <>
             {/*
             <div id="wrap_content">
-                <div class="comments_wrap">
-                    <div class="num_box">
-                        <span class="txt_tit">댓글</span>
-                        <span class="txt_num">${commentsNum}</span>
-                    </div>
-                    <c:forEach var="comments" items="${commentsList}">
-                        <div class="comments_box">
-                            <span class="txt_info">
-                                <span>${comments.userid }</span>
-                                <span>${comments.donation }원</span>
-                                <span>${comments.date_donation }</span>
-                            </span>
-                            <div class="txt_cmt">
-                                <span>${comments.comments }</span>
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
             // 수정하기 btn
                 <c:if test="${content.writer == loginIdx}">
                     <div id="btn_update">
                         <a href="/write?cate=fund&idx=${content.idx}"><span>수 정</span></a>		
                     </div>
                 </c:if>
-                        
-            
             </div> 
         */}
             <Header />
@@ -51,23 +48,7 @@ function Contents() {
 
                 {/* Body Content */}
                 <div className="relative">
-                    <div className="w-700 mt-0 m-auto">
-                        <span className="mt-12 block text-xl text-slate-900 break-all">contents-title-data</span>
-                        <span className="block mt-4 m-auto text-base leading-7 text-slate-700 whitespace-pre-line break-all">
-                            <p>
-                                contents-contents-data<br/> 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 
-                                이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 
-                                이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 
-                                이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 
-                                이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 
-                                이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 
-                                이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 
-                                이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 
-                                이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 이것은 본문 내용입니다. 
-                            </p>
-                        </span>
-                        <span className="block h-96 bg-no-repeat bg-center bg-cover bg-dog-shelter1"></span>
-                    </div>
+                    <ContentOfProject />
                 </div>
 
                 <div className="w-700 mt-12 m-auto border-t-2 border-b-2 text-center pt-14 pl-0 pr-0 pb-7">

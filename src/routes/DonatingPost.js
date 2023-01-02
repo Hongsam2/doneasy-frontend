@@ -9,7 +9,8 @@ function DonatingPost ({}) {
     const [ ProjectImage, setProjectImage] = useState('');
 
     return (
-        <></>
+        <>
+        </>
                 
     );
 }

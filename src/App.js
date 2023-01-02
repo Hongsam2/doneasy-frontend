@@ -5,6 +5,7 @@ import Project from './routes/Project';
 import Comment from './routes/Comment';
 import Admin from './routes/Admin';
 import Campaign from './routes/Campaign';
+import NoticeDetail from './routes/NoticeDetail';
 
 function App() {
     return (
@@ -14,6 +15,10 @@ function App() {
                 <Route path="/admin" element={<Notice />} />
                 <Route path="/admin/notice" element={<Notice />} />
                 <Route path="/admin/notice/create" element={<NoticeCreate />} />
+                <Route
+                    path="/admin/notice/detail/:id"
+                    element={<NoticeDetail />}
+                />
                 <Route path="/admin/project" element={<Project />} />
                 <Route path="/admin/comment" element={<Comment />} />
                 <Route path="/admin/campaign" element={<Campaign />} />

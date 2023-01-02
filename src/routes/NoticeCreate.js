@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Content from '../components/admin/notice/create/Content';
+import Content from '../components/admin/notice/create/CreateContent';
 import Sidebar from '../components/Sidebar';
 
 function NoticeCreate() {
@@ -9,6 +9,7 @@ function NoticeCreate() {
     const [index, setIndex] = useState(0);
     const [contentList, setContentList] = useState([]);
     const [contextList, setContextList] = useState([]);
+    const [imageList, setImageList] = useState([]);
 
     const onTitleChange = (e) => {
         setTitle(e.target.value);
@@ -22,26 +23,36 @@ function NoticeCreate() {
         setContentList(list);
         setIndex(index + 1);
     };
-    const changeContent = (content, index) => {
+    const changeContent = (content, image, index) => {
         const list = [];
+        const img = [];
         for (let i = 0; i < index; i++) {
             list.push(contextList.at(i));
+            img.push(img.at(i));
         }
         list.push(content);
+        img.push(image);
         for (let i = index + 1; i < contentList.length; i++) {
             list.push(contextList.at(i));
+            img.push(img.at(i));
         }
         setContextList(list);
+        setImageList(img);
     };
 
     const deleteContent = (index) => {
         console.log(contextList);
         const list = [...contextList];
+        const imgList = [...imageList];
         console.log('hi');
         const removedList = list.filter((content) => {
             return content && content.index !== index;
         });
+        const removedImgList = imgList.filter((image) => {
+            return image && image.index !== index;
+        });
         setContextList(removedList);
+        setImageList(removedImgList);
         console.log('removedList');
         console.log(removedList);
         const numberList = [];
@@ -52,10 +63,15 @@ function NoticeCreate() {
     };
     const onSubmitClick = () => {
         const formData = new FormData();
-        formData.append('title', title);
-        formData.append('contextList', contextList);
+        const noticeSaveDto = { title: title, contextList: contextList };
+        const json = JSON.stringify(noticeSaveDto);
+        const blob = new Blob([json], { type: 'application/json' });
+        formData.append('noticeSaveDto', blob);
+        imageList.forEach((image) => {
+            formData.append('fileList', image);
+        });
         console.log(contextList);
-        console.log(formData);
+        console.log(imageList);
         axios
             .post('http://localhost:8080/admin/notice/create', formData)
             .then((response) => {
@@ -92,7 +108,7 @@ function NoticeCreate() {
                                         />
                                     );
                                 })}
-                            <div className="border-t pt-2">
+                            <div className="pt-2">
                                 <button
                                     className="bg-blue-50 border rounded-lg tracking-wider px-2 py-1.5 my-4 duration-150 hover:bg-blue-200 hover:duration-150"
                                     onClick={onAddClick}

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import List from '../components/admin/notice/List';
 import Sidebar from '../components/Sidebar';
 
 function Notice() {
@@ -27,11 +28,14 @@ function Notice() {
     const onSubmitClick = (e) => {
         console.log('press enter');
     };
+    const onDetailClick = (i) => {
+        window.location.href = `/admin/notice/detail/${i}`;
+    };
     return (
         <>
             <div className="flex bg-[#fefefe] w-3/5 mx-auto">
                 <Sidebar focus="notice" />
-                <div className="w-9/12 mx-auto pt-20">
+                <div className="w-7/12 mx-auto pt-20 min-w-fit">
                     <div className="text-right">
                         <Link to="/admin/notice/create">
                             <button className="border bg-gray-100 rounded-md mb-4 text-gray-800 tracking-wider py-0.5 px-6 duration-150 hover:duration-150 hover:bg-gray-200">
@@ -49,21 +53,9 @@ function Notice() {
                                 </tr>
                             </thead>
                             <tbody className="text-center">
-                                <tr className="border-t border-gray-100 duration-150 hover:cursor-pointer hover:bg-gray-200 hover:duration-150">
-                                    <td className="py-1">1</td>
-                                    <td>기부를 합시다!</td>
-                                    <td>2020.12.31</td>
-                                </tr>
-                                <tr className="border-t border-gray-100 duration-150 hover:cursor-pointer hover:bg-gray-200 hover:duration-150">
-                                    <td className="py-1">1</td>
-                                    <td>기부를 합시다!</td>
-                                    <td>2020.12.31</td>
-                                </tr>
-                                <tr className="border-t border-gray-100 duration-150 hover:cursor-pointer hover:bg-gray-200 hover:duration-150">
-                                    <td className="py-1">1</td>
-                                    <td>기부를 합시다!</td>
-                                    <td>2020.12.31</td>
-                                </tr>
+                                <List index={1} onDetailClick={onDetailClick} />
+                                <List index={2} onDetailClick={onDetailClick} />
+                                <List index={3} onDetailClick={onDetailClick} />
                             </tbody>
                         </table>
                     </div>

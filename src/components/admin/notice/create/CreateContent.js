@@ -8,18 +8,17 @@ function Content({ index, changeContent, deleteContent }) {
     const [context, setContext] = useState({});
 
     useEffect(() => {
-        console.log('my index');
-        console.log(index);
-        changeContent(context, index);
+        console.log(image);
+        changeContent(context, image, index);
     }, []);
 
     useEffect(() => {
-        setContext({ subtitle, image, content, index });
-    }, [subtitle, image, content, index]);
+        setContext({ subtitle, content, index });
+    }, [subtitle, content, index]);
 
     useEffect(() => {
-        changeContent(context, index);
-    }, [context, index]);
+        changeContent(context, image, index);
+    }, [context, image, index]);
 
     const onSubtitleChange = (e) => {
         setSubtitle(e.target.value);

@@ -1,11 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function SubSidebar({ subject }) {
     const [subtitle, setSubtitle] = useState('');
-    const onBtnClick = (e) => {};
+
+    useEffect(() => {
+        setSubtitle(subject);
+    }, [subject]);
+
+    const onBtnClick = (e) => {
+        const message = e.target.innerText;
+        if (message === '제안서 요청') {
+            window.location.href = '/admin/project/proposal';
+        }
+    };
     return (
         <>
-            <div className="h-screen bg-gray-300 w-32 text-center">
+            <div className="h-screen w-32 text-center bg-gray-50">
                 <div className="pt-20">
                     {subject === 'project' && (
                         <div>
@@ -15,16 +25,13 @@ function SubSidebar({ subject }) {
                                 }`}
                                 onClick={onBtnClick}
                             >
-                                제안서 요청
-                            </button>
-                            <button
-                                className="py-2 my-2 text-gray-400 hover:text-gray-700 hover:duration-150 hover:text-lg duration-150 block mx-auto tracking-wider"
-                                onClick={onBtnClick}
-                            >
                                 제안서 목록
                             </button>
                             <button
-                                className="py-2 my-2 text-gray-400 hover:text-gray-700 hover:duration-150 hover:text-lg duration-150 block mx-auto tracking-wider"
+                                className={`py-2 my-2 text-gray-400 hover:text-gray-700 hover:duration-150 hover:text-lg duration-150 block mx-auto tracking-wider ${
+                                    subtitle === 'project' &&
+                                    'text-gray-700 text-lg'
+                                }`}
                                 onClick={onBtnClick}
                             >
                                 프로젝트

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import Comments from "../components/Comments";
 import ContentOfProject from "../components/ContentOfProject";
@@ -8,12 +9,21 @@ import Header from "../components/layout/Header";
 
 function Contents() {
     const [contents, setContents] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const location = useLocation();
 
     useEffect(() => {
-        axios.get("http://localhost:8080/content-of-project/get-content")
+        console.log(location)
+        const projectId = location.pathname.substring(9)
+        axios.post("http://localhost:8080/content-of-project/get-content", {id:location.pathname.substring(9)})
             .then((response) => {
                 console.log(response);
-                setContents(response.data);
+                const list = response.data;
+                list.sort((a, b) => {
+                    return a.order_num - b.order_num;
+                })
+                setContents(list);
+                setLoading(true);
             })
             .catch((error) => {
                 console.log(error);
@@ -48,7 +58,14 @@ function Contents() {
 
                 {/* Body Content */}
                 <div className="relative">
-                    <ContentOfProject />
+                    {loading && contents.map((value) => {
+                        return (
+                            <ContentOfProject 
+                                contents={value}
+                                key={value.id}
+                            />
+                        );
+                    })}
                 </div>
 
                 <div className="w-700 mt-12 m-auto border-t-2 border-b-2 text-center pt-14 pl-0 pr-0 pb-7">

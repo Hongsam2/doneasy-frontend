@@ -7,6 +7,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path={'/'} element={<Project/>}/>
+        <Route path='/project/:projectId' element={<Project/>}/>
       </Routes>
     </BrowserRouter>
   );

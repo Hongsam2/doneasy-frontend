@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Content from '../components/admin/notice/create/Content';
 import Sidebar from '../components/Sidebar';
 
@@ -48,6 +50,21 @@ function NoticeCreate() {
         });
         setContentList(numberList);
     };
+    const onSubmitClick = () => {
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('contextList', contextList);
+        console.log(contextList);
+        console.log(formData);
+        axios
+            .post('http://localhost:8080/admin/notice/create', formData)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
     return (
         <>
             <div className="flex bg-[#fefefe] w-3/5 mx-auto">
@@ -85,12 +102,17 @@ function NoticeCreate() {
                             </div>
                         </div>
                         <div className="text-center border-t pt-4">
-                            <button className="rounded-lg px-3 py-1.5 tracking-wider mr-2 border bg-gray-50 duration-150 hover:bg-gray-100 hover:duration-150">
+                            <button
+                                className="rounded-lg px-3 py-1.5 tracking-wider mr-2 border bg-gray-50 duration-150 hover:bg-gray-100 hover:duration-150"
+                                onClick={onSubmitClick}
+                            >
                                 Sumbit
                             </button>
-                            <button className="rounded-lg px-3 py-1.5 tracking-wider ml-2 border bg-gray-50 duration-150 hover:bg-gray-100 hover:duration-150">
-                                Cancel
-                            </button>
+                            <Link to="/admin/notice">
+                                <button className="rounded-lg px-3 py-1.5 tracking-wider ml-2 border bg-gray-50 duration-150 hover:bg-gray-100 hover:duration-150">
+                                    Cancel
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

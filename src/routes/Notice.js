@@ -1,9 +1,21 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 
 function Notice() {
     const [text, setText] = useState('');
+
+    useEffect(() => {
+        axios
+            .get('http://localhost:8080/admin/notice')
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    });
     const onSearchChange = (e) => {
         setText(e.target.value);
     };

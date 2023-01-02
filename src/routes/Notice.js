@@ -35,7 +35,7 @@ function Notice() {
         <>
             <div className="flex bg-[#fefefe] w-3/5 mx-auto">
                 <Sidebar focus="notice" />
-                <div className="w-7/12 mx-auto pt-20 min-w-fit">
+                <div className="w-9/12 mx-auto pt-20 min-w-fit">
                     <div className="text-right">
                         <Link to="/admin/notice/create">
                             <button className="border bg-gray-100 rounded-md mb-4 text-gray-800 tracking-wider py-0.5 px-6 duration-150 hover:duration-150 hover:bg-gray-200">

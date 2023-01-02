@@ -1,11 +1,19 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Content from '../components/admin/notice/Content';
 import Sidebar from '../components/Sidebar';
 
-function NoticeDetail() {
+function NoticeModify() {
     const [title, setTitle] = useState('');
-    const id = 1;
+    const location = useLocation();
+
+    useEffect(() => {
+        setTitle(location.state.title);
+    }, []);
+
+    const onTitleChange = (e) => {
+        setTitle(e.target.value);
+    };
     return (
         <>
             <div className="flex bg-[#fefefe] w-3/5 mx-auto">
@@ -15,17 +23,17 @@ function NoticeDetail() {
                         <button className="rounded-lg bg-red-100 px-3 py-1.5 mr-4 tracking-wider duration-150 hover:bg-red-200 hover:duration-150">
                             삭제
                         </button>
-                        <Link
-                            to={`/admin/notice/${id}/modify`}
-                            state={{ title: title }}
-                        >
-                            <button className="rounded-lg bg-lime-100 px-3 py-1.5 tracking-wider duration-150 hover:bg-lime-200 hover:duration-150">
-                                수정
-                            </button>
-                        </Link>
+                        <button className="rounded-lg bg-lime-100 px-3 py-1.5 tracking-wider duration-150 hover:bg-lime-200 hover:duration-150">
+                            완료
+                        </button>
                     </div>
                     <div className="border-t py-2 text-center tracking-wider text-4xl my-2">
-                        title
+                        <input
+                            type="text"
+                            value={title}
+                            onChange={onTitleChange}
+                            className="border"
+                        />
                     </div>
                     <div>
                         <Content />
@@ -35,4 +43,4 @@ function NoticeDetail() {
         </>
     );
 }
-export default NoticeDetail;
+export default NoticeModify;

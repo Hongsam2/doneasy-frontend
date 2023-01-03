@@ -76,6 +76,7 @@ function NoticeCreate() {
             .post('http://localhost:8080/admin/notice/create', formData)
             .then((response) => {
                 console.log(response);
+                window.location.href = '/admin/notice';
             })
             .catch((error) => {
                 console.log(error);

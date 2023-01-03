@@ -9,6 +9,7 @@ function Project() {
     const onSearchValueChange = (e) => {
         setSearchValue(e.target.value);
     };
+
     return (
         <>
             <div className="flex bg-[#fefefe] w-3/5 mx-auto">

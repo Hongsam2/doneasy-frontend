@@ -6,17 +6,24 @@ import Sidebar from '../components/Sidebar';
 
 function Notice() {
     const [text, setText] = useState('');
+    const [postList, setPostList] = useState([]);
+    const [loading, setLoading] = useState(false);
 
+    useEffect(() => {
+        console.log(postList);
+        setLoading(true);
+    }, [postList]);
     useEffect(() => {
         axios
             .get('http://localhost:8080/admin/notice')
             .then((response) => {
                 console.log(response);
+                setPostList(response.data);
             })
             .catch((error) => {
                 console.log(error);
             });
-    });
+    }, []);
     const onSearchChange = (e) => {
         setText(e.target.value);
     };
@@ -53,9 +60,16 @@ function Notice() {
                                 </tr>
                             </thead>
                             <tbody className="text-center">
-                                <List index={1} onDetailClick={onDetailClick} />
-                                <List index={2} onDetailClick={onDetailClick} />
-                                <List index={3} onDetailClick={onDetailClick} />
+                                {loading &&
+                                    postList.map((value) => {
+                                        return (
+                                            <List
+                                                key={value.id}
+                                                value={value}
+                                                onDetailClick={onDetailClick}
+                                            />
+                                        );
+                                    })}
                             </tbody>
                         </table>
                     </div>

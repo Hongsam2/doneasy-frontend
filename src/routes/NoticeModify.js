@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Content from '../components/admin/notice/Content';
+import DetailContent from '../components/admin/notice/DetailContent';
 import Sidebar from '../components/Sidebar';
 
 //TODO
@@ -37,7 +37,7 @@ function NoticeModify() {
                         />
                     </div>
                     <div>
-                        <Content />
+                        <DetailContent />
                     </div>
                 </div>
             </div>

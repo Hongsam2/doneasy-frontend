@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Content from '../components/admin/notice/create/CreateContent';
+import Content from '../components/admin/notice/create/Content';
 import Sidebar from '../components/Sidebar';
 
 function NoticeCreate() {
@@ -11,52 +11,82 @@ function NoticeCreate() {
     const [contextList, setContextList] = useState([]);
     const [imageList, setImageList] = useState([]);
 
+    useEffect(() => {
+        console.log(contextList);
+        console.log(imageList);
+    }, [imageList, contextList]);
     const onTitleChange = (e) => {
         setTitle(e.target.value);
     };
     const onAddClick = () => {
-        console.log(index);
         const list = [...contentList];
         list.push(index);
-        console.log('list');
-        console.log(list);
         setContentList(list);
         setIndex(index + 1);
     };
-    const changeContent = (content, image, index) => {
+    const changeContent = (content) => {
+        let index = 0;
         const list = [];
-        const img = [];
-        for (let i = 0; i < index; i++) {
-            list.push(contextList.at(i));
-            img.push(img.at(i));
-        }
+        let flag = false;
+        contextList.forEach((context) => {
+            if (context.index === content.index) {
+                flag = true;
+            } else if (!flag) {
+                index++;
+                list.push(context);
+            }
+        });
         list.push(content);
-        img.push(image);
-        for (let i = index + 1; i < contentList.length; i++) {
+        for (let i = index + 1; i < contextList.length; i++) {
             list.push(contextList.at(i));
-            img.push(img.at(i));
         }
+
         setContextList(list);
-        setImageList(img);
+    };
+
+    const changeImage = (index, image) => {
+        if (image === '') return;
+        let imageIndex = 0;
+        let flag = false;
+        const list = [];
+        contextList.forEach((context) => {
+            if (!flag && context.index !== index) {
+                imageIndex++;
+            } else if (context.index === index) {
+                flag = true;
+            }
+        });
+        for (let i = 0; i < imageIndex; i++) {
+            list.push(imageList.at(i));
+        }
+        list.push(image);
+        for (let i = imageIndex + 1; i < imageList.length; i++) {
+            list.push(imageList.at(i));
+        }
+        setImageList(list);
     };
 
     const deleteContent = (index) => {
-        console.log(contextList);
-        const list = [...contextList];
-        const imgList = [...imageList];
-        console.log('hi');
-        const removedList = list.filter((content) => {
-            return content && content.index !== index;
+        const list = [];
+        const imgList = [];
+        let imageIndex = 0;
+        let flag = false;
+        contextList.forEach((context) => {
+            if (!flag && context.index !== index) {
+                imageIndex++;
+            } else if (context.index === index) {
+                flag = true;
+            }
         });
-        const removedImgList = imgList.filter((image) => {
-            return image && image.index !== index;
-        });
-        setContextList(removedList);
-        setImageList(removedImgList);
-        console.log('removedList');
-        console.log(removedList);
+        for (let i = 0; i < contextList.length; i++) {
+            if (i === imageIndex) continue;
+            list.push(contextList.at(i));
+            imgList.push(imageList.at(i));
+        }
+        setContextList(list);
+        setImageList(imgList);
         const numberList = [];
-        removedList.forEach((content) => {
+        list.forEach((content) => {
             numberList.push(content.index);
         });
         setContentList(numberList);
@@ -103,6 +133,7 @@ function NoticeCreate() {
                                     return (
                                         <Content
                                             changeContent={changeContent}
+                                            changeImage={changeImage}
                                             deleteContent={deleteContent}
                                             key={content}
                                             index={content}
@@ -111,7 +142,7 @@ function NoticeCreate() {
                                 })}
                             <div className="pt-2">
                                 <button
-                                    className="bg-blue-50 border rounded-lg tracking-wider px-2 py-1.5 my-4 duration-150 hover:bg-blue-200 hover:duration-150"
+                                    className="bg-gray-50 border rounded-lg tracking-wider px-2 py-1.5 my-4 duration-150 hover:bg-gray-200 hover:duration-150"
                                     onClick={onAddClick}
                                 >
                                     ADD

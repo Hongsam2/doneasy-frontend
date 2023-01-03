@@ -1,18 +1,20 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import Content from '../components/admin/notice/Content';
+import DetailContent from '../components/admin/notice/DetailContent';
 import Sidebar from '../components/Sidebar';
 
 function NoticeDetail() {
     const [id, setId] = useState(0);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState([]);
+    const [loading, setLoading] = useState(false);
     const location = useLocation();
     useEffect(() => {
-        setId(location.pathname.substring(21));
-        console.log(id);
-        console.log(location);
+        setLoading(true);
+    }, [content]);
+    useEffect(() => {
+        setId(Number.parseInt(location.pathname.substring(21)));
         axios
             .get(
                 `http://localhost:8080/admin/notice/detail/${location.pathname.substring(
@@ -21,6 +23,8 @@ function NoticeDetail() {
             )
             .then((response) => {
                 console.log(response);
+                setTitle(response.data.title);
+                setContent(response.data.contentOfNoticeDetailDtoList);
             })
             .catch((error) => {
                 console.log(error);
@@ -35,20 +39,25 @@ function NoticeDetail() {
                         <button className="rounded-lg bg-red-100 px-3 py-1.5 mr-4 tracking-wider duration-150 hover:bg-red-200 hover:duration-150">
                             삭제
                         </button>
-                        {/* <Link
-                            to={`/admin/notice/${id}/modify`}
-                            state={{ title: title }}
-                        >
+                        <Link to={`/admin/notice/${id}/modify`}>
                             <button className="rounded-lg bg-lime-100 px-3 py-1.5 tracking-wider duration-150 hover:bg-lime-200 hover:duration-150">
                                 수정
                             </button>
-                        </Link> */}
+                        </Link>
                     </div>
-                    <div className="border-t py-2 text-center tracking-wider text-4xl my-2">
-                        title
+                    <div className="border-t-2 border-b py-5 text-center tracking-wider text-4xl my-2 mt-3">
+                        {title}
                     </div>
                     <div>
-                        <Content />
+                        {loading &&
+                            content.map((value) => {
+                                return (
+                                    <DetailContent
+                                        value={value}
+                                        key={value.index}
+                                    />
+                                );
+                            })}
                     </div>
                 </div>
             </div>

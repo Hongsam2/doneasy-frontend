@@ -1,24 +1,23 @@
 import { useEffect, useState } from 'react';
 
-function Content({ index, changeContent, deleteContent }) {
+function Content({ index, changeContent, deleteContent, changeImage }) {
     const [subtitle, setSubtitle] = useState('');
     const [image, setImage] = useState('');
     const [content, setContent] = useState('');
     const [imagesrc, setImagesrc] = useState('');
     const [context, setContext] = useState({});
 
-    useEffect(() => {
-        console.log(image);
-        changeContent(context, image, index);
-    }, []);
+    // useEffect(() => {
+    //     setContext({ subtitle, content, index });
+    // }, [subtitle, content]);
 
     useEffect(() => {
-        setContext({ subtitle, content, index });
-    }, [subtitle, content, index]);
+        changeContent({ subtitle, content, index });
+    }, [subtitle, content]);
 
     useEffect(() => {
-        changeContent(context, image, index);
-    }, [context, image, index]);
+        changeImage(index, image);
+    }, [image]);
 
     const onSubtitleChange = (e) => {
         setSubtitle(e.target.value);

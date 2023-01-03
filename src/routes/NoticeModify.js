@@ -1,15 +1,39 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import DetailContent from '../components/admin/notice/DetailContent';
+import ModifyContent from '../components/admin/notice/modify/ModifyContent';
 import Sidebar from '../components/Sidebar';
 
 //TODO
 function NoticeModify() {
+    const [id, setId] = useState(-1);
     const [title, setTitle] = useState('');
+    const [content, setContent] = useState([]);
+    const [loading, setLoading] = useState(false);
     const location = useLocation();
 
     useEffect(() => {
-        setTitle(location.state.title);
+        setLoading(true);
+    }, [content]);
+
+    useEffect(() => {
+        if (id !== -1) {
+            axios
+                .get(`http://localhost:8080/admin/notice/detail/${id}`)
+                .then((response) => {
+                    console.log(response);
+                    setTitle(response.data.title);
+                    setContent(response.data.contentOfNoticeDetailDtoList);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [id]);
+
+    useEffect(() => {
+        const id = Number.parseInt(location.pathname.substring(14, 15));
+        setId(id);
     }, []);
 
     const onTitleChange = (e) => {
@@ -37,7 +61,15 @@ function NoticeModify() {
                         />
                     </div>
                     <div>
-                        <DetailContent />
+                        {loading &&
+                            content.map((value) => {
+                                return (
+                                    <ModifyContent
+                                        value={value}
+                                        key={value.index}
+                                    />
+                                );
+                            })}
                     </div>
                 </div>
             </div>

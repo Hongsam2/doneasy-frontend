@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import DetailContent from '../components/admin/notice/DetailContent';
 import Sidebar from '../components/Sidebar';
 
+// Modify ???
 function NoticeDetail() {
     const [id, setId] = useState(0);
     const [title, setTitle] = useState('');
@@ -54,11 +55,11 @@ function NoticeDetail() {
                         >
                             삭제
                         </button>
-                        <Link to={`/admin/notice/${id}/modify`}>
+                        {/* <Link to={`/admin/notice/${id}/modify`}>
                             <button className="rounded-lg bg-lime-100 px-3 py-1.5 tracking-wider duration-150 hover:bg-lime-200 hover:duration-150">
                                 수정
                             </button>
-                        </Link>
+                        </Link> */}
                     </div>
                     <div className="border-t-2 border-b py-5 text-center tracking-wider text-4xl my-2 mt-3">
                         {title}

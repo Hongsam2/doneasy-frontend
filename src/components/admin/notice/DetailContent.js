@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function Content({ value }) {
+function DetailContent({ value }) {
     const [subtitle, setSubtitle] = useState('');
     const [imageSrc, setImageSrc] = useState('');
     const [content, setContent] = useState('');
@@ -34,4 +34,4 @@ function Content({ value }) {
         </>
     );
 }
-export default Content;
+export default DetailContent;

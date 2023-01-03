@@ -11,12 +11,15 @@ module.exports = {
       },
       spacing: {
         '01': '1px',
+        '02': '2px',
         '70': '70px',
+        '88': '88px',
         '90': '90px',
         '100': '100px',
         '300': '300px',
         '350': '350px',
         '620': '620px',
+        '680': '680',
         '700': '700px',
       },
       backgroundImage : {
@@ -32,9 +35,14 @@ module.exports = {
       zIndex: {
         '100': '100',
       },
+      fontSize: {
+        full: '100%',
+      },
     },
   },
   plugins: [
-    require('flowbite/plugin')
+    require('flowbite/plugin'),
+    require('tailwindcss'),
+    require('autoprefixer'),
   ],
 }

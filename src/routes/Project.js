@@ -10,12 +10,40 @@ import Header from "../components/layout/Header";
 function Contents() {
     const [contents, setContents] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [title, setTitle] = useState("");
+    const [organization, setOrganization] = useState("");
+    const [targetPrice, setTargetPrice] = useState(0);
+    const [createdDate, setCreatedDate] = useState("");
+    const [deadline, setDeadline] = useState("");
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [fundrasingMoney, setFundrasingMoney] = useState(0);
+    const [comments, setComments] = useState([]);
+    const [commentLoading, setCommentLoading] = useState(false);
     const location = useLocation();
 
     useEffect(() => {
         console.log(location)
         const projectId = location.pathname.substring(9)
-        axios.post("http://localhost:8080/content-of-project/get-content", {id:location.pathname.substring(9)})
+        const formData =  new FormData();
+        formData.append("id", projectId);
+
+        axios.post("http://localhost:8080/project/get-project", formData)
+            .then((response) => {
+                console.log(response);
+                setTitle(response.data.title);
+                setOrganization(response.data.nickname);
+                setTargetPrice(response.data.target_price);
+                setCreatedDate(response.data.created_date);
+                setDeadline(response.data.deadline);
+                setStartDate(response.data.service_start_date);
+                setEndDate(response.data.service_end_date);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        axios.post("http://localhost:8080/content-of-project/get-content", formData)
             .then((response) => {
                 console.log(response);
                 const list = response.data;
@@ -28,6 +56,16 @@ function Contents() {
             .catch((error) => {
                 console.log(error);
             });
+        
+        axios.post("http://localhost:8080/comment-of-project/getcomment", formData)
+            .then((response) => {
+                console.log(response);
+                setComments(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        
         
     }, []);
 
@@ -49,8 +87,8 @@ function Contents() {
                 <div className="w-full h-300 mb-70 relative">
                     <div className="w-full h-full absolute bg-[#0006]">
                         <div className="pt-90 relative z-10 text-center align-middle">
-                            <span className="block w-620 max-h-100 m-auto font-normal text-4xl text-white">title-data</span>
-                            <span className="block w-620 max-h-14 mt-0 m-auto pt-2 text-sm text-white opacity-60">agency-data</span>
+                            <span className="block w-620 max-h-100 m-auto font-normal text-4xl text-white">{title}</span>
+                            <span className="block w-620 max-h-14 mt-0 m-auto pt-2 text-lg text-white opacity-60">by {organization}</span>
                         </div>
                     </div>
                     <div className="w-full h-full bg-cover bg-[#3b3820] bg-test-img"></div>
@@ -68,15 +106,32 @@ function Contents() {
                     })}
                 </div>
 
-                <div className="w-700 mt-12 m-auto border-t-2 border-b-2 text-center pt-14 pl-0 pr-0 pb-7">
-                    <span className="block text-fundrasing-color text-4xl text-ellipsis whitespace-nowrap leading-80">1,750,000<span className="text-2xl">원</span></span>
-                    <span className="text-base text-black">2,000,000원 목표</span>
+                <div className="w-700 mt-12 m-auto border-t-2 border-b-2 text-center pt-14 pl-0 pr-0 pb-14">
+                    <span className="block text-fundrasing-color text-4xl text-ellipsis whitespace-nowrap leading-80">{fundrasingMoney}<span className="text-2xl">원</span></span>
+                    <span className="text-base text-black">{targetPrice}원 목표</span>
                     <h1>직접기부</h1>
                     <h1>참여기부</h1>
                 </div>
+                
+                {/* 프로젝트팀 */}
+                <div className="relative">
+                    <div className="w-700 m-auto pt-8 pl-0 pr-0 pb-8">
+                        <span className="block m-auto leading-7 text-xl text-slate-700 whitespace-pre-line break-all">프로젝트팀 : {organization}</span>
+                        <span className="block mt-2 text-base text-slate-600  break-all">모금기간: {createdDate} - {deadline}</span>
+                        <span className="block mt-2 text-base text-slate-600  break-all">사업기간: {startDate} - {endDate}</span>
+                    </div>
+                </div>
 
                 {/* 댓글 */}
-                <Comments />
+                {commentLoading && comments.map((comment) => {
+                    return (
+                        <Comments 
+                            key={comment.id}
+                            comments = {comment}
+                        />
+                    );
+                })}
+                
 
                 {/* 수정하기 Btn */}
                 <div>

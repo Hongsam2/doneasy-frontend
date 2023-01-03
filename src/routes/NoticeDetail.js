@@ -30,13 +30,28 @@ function NoticeDetail() {
                 console.log(error);
             });
     }, []);
+
+    const onDeleteClick = () => {
+        axios
+            .delete(`http://localhost:8080/admin/notice/delete/${id}`)
+            .then((response) => {
+                console.log(response);
+                window.location.href = '/admin/notice';
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
     return (
         <>
             <div className="flex bg-[#fefefe] w-3/5 mx-auto">
                 <Sidebar focus="notice" />
                 <div className="w-7/12 mx-auto pt-20">
                     <div className="text-right">
-                        <button className="rounded-lg bg-red-100 px-3 py-1.5 mr-4 tracking-wider duration-150 hover:bg-red-200 hover:duration-150">
+                        <button
+                            className="rounded-lg bg-red-100 px-3 py-1.5 mr-4 tracking-wider duration-150 hover:bg-red-200 hover:duration-150"
+                            onClick={onDeleteClick}
+                        >
                             삭제
                         </button>
                         <Link to={`/admin/notice/${id}/modify`}>

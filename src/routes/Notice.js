@@ -52,11 +52,11 @@ function Notice() {
                     </div>
                     <div className="min-h-fit border-t border-gray-300">
                         <table className="h-full w-full">
-                            <thead>
+                            <thead className="text-center">
                                 <tr>
-                                    <td className="px-4 py-1">#</td>
-                                    <td className="px-60">제목</td>
-                                    <td className="px-24">게시일</td>
+                                    <td className="py-1">#</td>
+                                    <td>제목</td>
+                                    <td>게시일</td>
                                 </tr>
                             </thead>
                             <tbody className="text-center">

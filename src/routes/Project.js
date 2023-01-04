@@ -1,13 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import SubSidebar from '../components/SubSidebar';
 import ProjectList from '../components/admin/project/ProjectList';
+import axios from 'axios';
 
 function Project() {
-    const [searchValue, setSearchValue] = useState('');
+    const [text, setText] = useState('');
+    const [contents, setContents] = useState([]);
+    const [loading, setLoading] = useState(false);
 
-    const onSearchValueChange = (e) => {
-        setSearchValue(e.target.value);
+    useEffect(() => {
+        setLoading(true);
+    }, [contents]);
+
+    useEffect(() => {
+        axios
+            .get('http://localhost:8080/admin/project')
+            .then((response) => {
+                setContents(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+    const onSearchChange = (e) => {
+        setText(e.target.value);
+    };
+    const onEnterKeyDown = (e) => {
+        if (e.code === 'Enter') {
+            onSubmitClick();
+        }
+    };
+    const onSubmitClick = () => {
+        if (text !== '') {
+            axios
+                .get(`http://localhost:8080/admin/project?s=${text}`)
+                .then((response) => {
+                    console.log(response.data);
+                    setContents(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
     };
 
     return (
@@ -42,23 +77,30 @@ function Project() {
                                 </div>
                             </div>
                             <div>
-                                <ProjectList status="done" />
-                                <ProjectList status="done" />
-                                <ProjectList status="done" />
-                                <ProjectList status="done" />
-                                <ProjectList status="done" />
-                                <ProjectList status="done" />
+                                {loading &&
+                                    contents.map((value) => {
+                                        return (
+                                            <ProjectList
+                                                value={value}
+                                                key={value.id}
+                                            />
+                                        );
+                                    })}
                             </div>
                         </div>
-                        <div className="border-t py-2 my-2 text-center">
+                        <div className="border-t py-2 my-6 text-center border-gray-300">
                             <input
                                 type="text"
-                                placeholder="검색어를 입력하세요."
-                                value={searchValue}
-                                onChange={onSearchValueChange}
-                                className="rounded-md border px-2 mr-2"
+                                placeholder="제목을 입력해주세요."
+                                className="rounded-2xl bg-gray-100 px-3 mr-3"
+                                onChange={onSearchChange}
+                                value={text}
+                                onKeyDown={onEnterKeyDown}
                             />
-                            <button className="rounded-lg tracking-wider px-3 py-1.5 bg-gray-50 duration-150 hover:bg-gray-200 hover:duration-150">
+                            <button
+                                className="bg-gray-100 px-1 py-0.5 tracking-wider rounded-md duration-150 hover:bg-gray-200 hover:duration-150"
+                                onClick={onSubmitClick}
+                            >
                                 검색
                             </button>
                         </div>

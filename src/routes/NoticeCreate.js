@@ -6,6 +6,7 @@ import Sidebar from '../components/Sidebar';
 
 function NoticeCreate() {
     const [title, setTitle] = useState('');
+    const [titleCheck, setTitleCheck] = useState(true);
     const [index, setIndex] = useState(0);
     const [contentList, setContentList] = useState([]);
     const [contextList, setContextList] = useState([]);
@@ -92,6 +93,11 @@ function NoticeCreate() {
         setContentList(numberList);
     };
     const onSubmitClick = () => {
+        if (title === '') {
+            setTitleCheck(false);
+            return;
+        }
+        setTitleCheck(true);
         const formData = new FormData();
         const noticeSaveDto = { title: title, contextList: contextList };
         const json = JSON.stringify(noticeSaveDto);
@@ -126,6 +132,11 @@ function NoticeCreate() {
                                 onChange={onTitleChange}
                                 className="w-full border rounded-md h-8 px-3 text-lg my-4"
                             />
+                            {!titleCheck && (
+                                <div className="text-red-500 tracking-wide text-md">
+                                    제목을 입력해주세요.
+                                </div>
+                            )}
                         </div>
                         <div className="text-center mt-2">
                             {contentList.length >= 1 &&

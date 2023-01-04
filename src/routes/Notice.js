@@ -33,15 +33,17 @@ function Notice() {
         }
     };
     const onSubmitClick = () => {
-        axios
-            .get(`http://localhost:8080/admin/notice?s=${text}`)
-            .then((response) => {
-                console.log(response.data);
-                setPostList(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        if (text !== '') {
+            axios
+                .get(`http://localhost:8080/admin/notice?s=${text}`)
+                .then((response) => {
+                    console.log(response.data);
+                    setPostList(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
     };
     const onDetailClick = (i) => {
         window.location.href = `/admin/notice/detail/${i}`;

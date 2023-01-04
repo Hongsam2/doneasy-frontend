@@ -102,10 +102,13 @@ function ProjectProposal() {
                       z-0"
           ></div>
           <div className="w-full mx-auto px-20 flex-col items-center space-y-6">
-            <h1 className="ml-40 text-white font-bold text-4xl font-sans">
-              프로젝트 제안
+            <h1 className="ml-28 text-white font-bold text-4xl font-sans">
+              DonEasy
             </h1>
-            <p className="text-white mt-1 ml-56">Give 해주세요</p>
+            <h1 className="ml-40 text-white font-bold text-4xl font-sans">
+              프로젝트 제안서
+            </h1>
+            <p className="text-white mt-1 ml-56">Money Laundering Company </p>
             <div className="flex justify-center lg:justify-start mt-6 ">
               <button
                 className="ml-60 hover:bg-[#719E71] hover:text-white hover:-translate-y-1 transition-all duration-500 bg-white text-black mt-4 px-4 py-2 rounded-2xl font-bold mb-2"
@@ -126,7 +129,7 @@ function ProjectProposal() {
         </div>
 
         <div className="flex w-full lg:w-3/5 justify-center items-center bg-gray-50 space-y-8">
-          <div className="w-full px-8 md:px-32 lg:px-40">
+          <div className="w-full px-8 md:px-32 lg:px-44">
             <div align="center" className="mb-5 block   text-[#07074D]">
               <label htmlFor="startday">시작 :</label>
               <input

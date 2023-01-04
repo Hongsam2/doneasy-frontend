@@ -171,10 +171,9 @@ function ContentsRe({ changeContents }) {
         >
           <div>
             {/* 로딩이 트루면 이미지태그를 뱉어라 */}
-            {loading && <img src={imageSrc} alt="img1" />}
 
             <span className="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D] bg-gray-200 px-4 py-2 transition duration-300 hover:bg-gray-400">
-              Browse
+              {loading && <img src={imageSrc} alt="-Browse" />}
             </span>
           </div>
         </label>
@@ -225,10 +224,8 @@ function ContentsRe({ changeContents }) {
               className="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center"
             >
               <div>
-                {loading2 && <img src={imageSrc2} alt="img1" />}
-
                 <span className="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D] bg-gray-200 px-4 py-2 transition duration-300 hover:bg-gray-400">
-                  Browse
+                  {loading2 && <img src={imageSrc2} alt="-Browse" />}
                 </span>
               </div>
             </label>
@@ -282,10 +279,8 @@ function ContentsRe({ changeContents }) {
               className="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center"
             >
               <div>
-                {loading3 && <img src={imageSrc3} alt="img1" />}
-
                 <span className="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D] bg-gray-200 px-4 py-2 transition duration-300 hover:bg-gray-400">
-                  Browse
+                  {loading3 && <img src={imageSrc3} alt="-Browse" />}
                 </span>
               </div>
             </label>

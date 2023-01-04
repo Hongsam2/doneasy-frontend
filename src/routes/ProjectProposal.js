@@ -15,8 +15,24 @@ function ProjectProposal() {
         axios
             .get('http://localhost:8080/admin/projectproposal')
             .then((response) => {
-                console.log(response);
-                setContents(response.data);
+                const list = response.data;
+                const wait = [];
+                const other = [];
+                list.forEach((element) => {
+                    if (element.status === 'WAIT') {
+                        wait.push(element);
+                    } else {
+                        other.push(element);
+                    }
+                });
+                wait.sort((a, b) => {
+                    return b.createdDate - a.createdDate;
+                });
+                other.sort((a, b) => {
+                    return b.createdDate - a.createdDate;
+                });
+                const result = [...wait, ...other];
+                setContents(result);
             })
             .catch((error) => {
                 console.log(error);

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import CommentForm from "../components/CommentForm";
 
 import Comments from "../components/Comments";
 import ContentOfProject from "../components/ContentOfProject";
@@ -20,14 +21,20 @@ function Contents() {
     const [fundrasingMoney, setFundrasingMoney] = useState(0);
     const [comments, setComments] = useState([]);
     const [commentLoading, setCommentLoading] = useState(false);
+    const [supprot, setSupport] = useState(0);
     const location = useLocation();
 
+    console.log(location)
+    
     useEffect(() => {
-        console.log(location)
+        setCommentLoading(true);
+        setFundrasingMoney(comments.length * 100);
+    }, [comments]);
+    
+    useEffect(() => {
         const projectId = location.pathname.substring(9)
         const formData =  new FormData();
         formData.append("id", projectId);
-
         axios.post("http://localhost:8080/project/get-project", formData)
             .then((response) => {
                 console.log(response);
@@ -57,7 +64,7 @@ function Contents() {
                 console.log(error);
             });
         
-        axios.post("http://localhost:8080/comment-of-project/getcomment", formData)
+        axios.post("http://localhost:8080/comment-of-project/get-comment", formData)
             .then((response) => {
                 console.log(response);
                 setComments(response.data);
@@ -68,6 +75,25 @@ function Contents() {
         
         
     }, []);
+
+    const onSupportClick = () => {
+        const project_id = Number.parseInt(location.pathname.substring(9))
+        axios.post("http://localhost:8080/support-of-project/save-support", {project_id:project_id})
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    };
+
+    const onSupportChange = (e) => {
+        setSupport(e.target.value);
+    }
+
+    const onDonationClick = () => {
+
+    };
 
     return (
         <>
@@ -107,7 +133,7 @@ function Contents() {
                 </div>
 
                 <div className="w-700 mt-12 m-auto border-t-2 border-b-2 text-center pt-14 pl-0 pr-0 pb-14">
-                    <span className="block text-fundrasing-color text-4xl text-ellipsis whitespace-nowrap leading-80">{fundrasingMoney}<span className="text-2xl">원</span></span>
+                    <span className="block text-green-600 text-4xl text-ellipsis whitespace-nowrap leading-80">{fundrasingMoney}<span className="text-2xl">원</span></span>
                     <span className="text-base text-black">{targetPrice}원 목표</span>
                     <h1>직접기부</h1>
                     <h1>참여기부</h1>
@@ -123,14 +149,29 @@ function Contents() {
                 </div>
 
                 {/* 댓글 */}
-                {commentLoading && comments.map((comment) => {
-                    return (
-                        <Comments 
-                            key={comment.id}
-                            comments = {comment}
-                        />
-                    );
-                })}
+                <div className="cmt_type3 w-700 relative m-auto">
+                    <CommentForm 
+                        money={comments.length * 100}
+                        projectId={location.pathname.substring(9)}
+                    />
+                    <div>
+                        <div className="wrap_info pt-0 border-t-0 mt-1">
+                            <span>
+                                댓글
+                                <span className="emph_sign ml-1.5 relative text-green-600">{comments.length}</span>
+                            </span>
+                        </div>
+                    </div>
+                    {commentLoading && comments.map((comment) => {
+                        return (
+                            <Comments 
+                                key={comment.id}
+                                comments = {comment}
+                            />
+                        );
+                    })}
+
+                </div>
                 
 
                 {/* 수정하기 Btn */}
@@ -140,20 +181,16 @@ function Contents() {
 
                 {/* 응원하기 하단 바 */}
                 <div className="z-100 fixed block left-1/2 bottom-2 w-700 h-14 -ml-350 bg-none" id="fund_float">
-                    <a className="float-left overflow-hidden relative w-1/4 h-14 leading-60 bg-[#434343] rounded-l-md cursor-pointer" >
-                        <span className="inline-block w-6 h-5 mt-5 mr-2 mb-0 ml-8 float-left"><img className="w-full" src="/img/ico_cheer.svg" /></span>
-                        <span className="inline-block ml-1 mt-3.5 text-xl text-[#fff] align-baseline float-left">응원</span>
-                        <span className="ml-2 inline-block text-base text-[#d9d9d9] mt-0">10{/*${cheer}*/}</span>
+                    <button onClick={onSupportClick} className="float-left overflow-hidden relative w-1/3 h-14 leading-60 bg-[#434343] rounded-l-md cursor-pointer" >
+                        <span className="inline-block w-6 h-5 mt-5 mr-2 mb-0 ml-16 float-left"><img className="w-full" src="/img/ico_cheer.svg" /></span>
+                        <span className="inline-block mt-3.5 text-xl text-[#fff] align-baseline float-left">응원</span>
+                        <span onChange={onSupportChange} className="ml-2 inline-block text-base text-[#d9d9d9] mt-0">{supprot}</span>
                         <div className="absolute top-2 right-0 w-01 h-9 bg-[#555]"></div>
-                    </a>
-                    <a className="float-left overflow-hidden relative w-1/4 h-14 leading-60 bg-[#434343] cursor-pointer" >
-                        <span className="inline-block w-6 h-5 mt-1 mr-1 mb-0 ml-12"><img className="w-full" src="/img/ico_share.svg" /></span>
-                        <span className="inline-block ml-1 text-xl text-[#fff] align-baseline">공유</span>
-                        <span className="ml-2 inline-block text-base text-[#d9d9d9] mt-0">10{/*${cheer}*/}</span>
-                    </a>
-                    <a className="float-left overflow-hidden relative w-1/2 h-14 leading-60 bg-[#dc287c] rounded-r-md cursor-pointer text-center">
+                    </button>
+                    
+                    <button onClick={onDonationClick} className="float-left overflow-hidden relative w-2/3 h-14 leading-60 bg-green-600 rounded-r-md cursor-pointer text-center">
                         <span className="inline-block text-xl text-[#fff] align-baseline">기부하기</span>
-                    </a>
+                    </button>
                 </div>
             </div>
             <Footer id="footer"/>

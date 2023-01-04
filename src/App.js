@@ -1,16 +1,16 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProjectProposal from "./routes/ProjectProposal";
-import CampaignProposal from "./routes/CampaignProposal";
+import ContentsOfProjectReview from "./routes/ContentOfProjectReview";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          {/* <Route  path={'/'} element={<ProjectProposal />}> </Route>
-<Route path={'/save'} element={<ProjectProposal/>}/> */}
-          <Route path={"/"} element={<CampaignProposal />} />
+          <Route path={"/saveReview"} element={<ContentsOfProjectReview />} />
+          <Route path={"/save"} element={<ContentsOfProjectReview />} />
+          <Route path={"/"} element={<ProjectProposal />} />
         </Routes>
       </BrowserRouter>
     </>

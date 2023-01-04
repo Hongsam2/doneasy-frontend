@@ -72,7 +72,8 @@ function ProjectProposal() {
       .post("http://localhost:8090/save", data)
       .then((Response) => {
         console.log(Response);
-        window.location.href = "/";
+        window.location.href = "/save";
+        // "/";
       })
       .catch((error) => {
         console.log(error);

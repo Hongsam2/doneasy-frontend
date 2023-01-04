@@ -3,6 +3,12 @@ function TestTemplate ()   {
     return(
         
         <>
+        <button>
+
+        </button>
+        <button>
+            
+        </button>
         </>
         
 

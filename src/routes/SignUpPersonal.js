@@ -41,11 +41,11 @@ function SignUpPersonal (){
         }
         
         const formData = new FormData();
-        formData.append('memberID', memberID)
-        formData.append('memberNickname', memberNickname)
-        formData.append('memberPw', memberPw)
-        formData.append('memberEMail', memberMail)
-        formData.append('memberPhone', memberPN)
+        formData.append('member_id', memberID)
+        formData.append('nickname', memberNickname)
+        formData.append('password', memberPw)
+        formData.append('email', memberMail)
+        formData.append('phone_number', memberPN)
         
         axios
             .post('http://localhost:8080/member/save', formData)
@@ -187,25 +187,25 @@ function SignUpPersonal (){
                       
                         
                         <div className="flex items-center justify-end mt-4">
-                            <button
-                                type="submit"
-                                onClick={onCancelClick}
-                                className="inline-flex items-center px-3 py-1 ml-5 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
-                            >
-                                Cancle
-                            </button>
                             <a
                                 className="ml-10 text-sm text-gray-600 underline hover:text-gray-900"
                                 href="#"
                             >
-                                이미 가입하셨습니까?
+                                already register?
                             </a>
+                            <button
+                                type="submit"
+                                onClick={onCancelClick}
+                                className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
+                            >
+                                Cancle
+                            </button>
                             <button
                                 type="submit"
                                 onClick={onRegisterClick}
                                 className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
                             >
-                                회원가입
+                                Register
                             </button>
                         </div>
                     </form>

@@ -5,12 +5,13 @@ import TestTemplate from './routes/TestTemplate'
 import SignUpPersonal from './routes/SignUpPersonal'
 import SelectSignUp from './routes/SelectSignUp';
 import SignUpOrganization from './routes/SignUpOrganization';
+import TinyDonatingScreen from './components/TinyDonatingScreen'
 
 function App() {
   return (
             <BrowserRouter>
               <Routes >
-                <Route path={'/'} element={<SignUpOrganization/>}/>
+                <Route path={'/'} element={<TinyDonatingScreen/>}/>
               </Routes>
             </BrowserRouter>
         

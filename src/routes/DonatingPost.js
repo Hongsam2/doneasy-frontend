@@ -1,16 +1,30 @@
 import { useState } from "react";
+import { useLocation } from "react-router";
+import TinyDonatingScreen from "../components/TinyDonatingScreen";
 
 function DonatingPost ({}) {
-    const [ ProjectId, setProjectID] = useState(0);                                     
-    const [ ProjectCategori, setProjecjCategori] = useState('');        
-    //const [ ProjectStartDate, setProjectStartDate] = useState('');
-    const [ ProjectEndDate, setProjectEndDate] = useState('');
-    const [ ProjectTargetAmount, setProjectTargetAmount] = useState(0);
-    const [ ProjectImage, setProjectImage] = useState('');
-
+    const [projectLoading, setProjectLoading] = useState(false);
+    const [projectList , setProjectList] = useState([]);
+    const location = useLocation();
+    
+    
     return (
-        <>
-        </>
+        <div className="border shadow-lg w-6/12 mx-auto mt-12 max-w-sm">
+
+        <div>
+            {projectLoading &&
+            projectList.map((TinyDonatingScreen) =>{
+                return(
+                    
+                    <TinyDonatingScreen
+                    key={TinyDonatingScreen.project.id}
+                    />
+                    );
+                })}
+                </div>
+        </div>
                 
     );
 }
+
+export default DonatingPost;

@@ -21,15 +21,16 @@ function Contents() {
     const [fundrasingMoney, setFundrasingMoney] = useState(0);
     const [comments, setComments] = useState([]);
     const [commentLoading, setCommentLoading] = useState(false);
-    const [supprot, setSupport] = useState(0);
+    const [support, setSupport] = useState(0);
     const location = useLocation();
 
     console.log(location)
+    console.log(comments);
     
     useEffect(() => {
         setCommentLoading(true);
-        setFundrasingMoney(comments.length * 100);
-    }, [comments]);
+        setFundrasingMoney((comments.length * 100) + (support * 100));
+    }, [comments, support]);
     
     useEffect(() => {
         const projectId = location.pathname.substring(9)
@@ -73,23 +74,35 @@ function Contents() {
                 console.log(error);
             });
         
-        
-    }, []);
-
-    const onSupportClick = () => {
-        const project_id = Number.parseInt(location.pathname.substring(9))
-        axios.post("http://localhost:8080/support-of-project/save-support", {project_id:project_id})
-            .then((response) => {
-                console.log(response);
+        axios.post("http://localhost:8080/support-of-project/get-support", formData)
+        .then((response) => {
+            console.log(response);
+                setSupport(response.data.length)
             })
             .catch((error) => {
                 console.log(error);
             })
-    };
+        
+        
+    }, []);
 
-    const onSupportChange = (e) => {
-        setSupport(e.target.value);
-    }
+    const onSupportClick = () => {
+        
+        const project_id = Number.parseInt(location.pathname.substring(9))
+        axios.post("http://localhost:8080/support-of-project/save-support", {project_id:project_id})
+            .then((response) => {
+                console.log(response);
+                console.log(support);
+                setSupport(support + 1)
+                window.location.reload();
+                
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        
+            
+    };
 
     const onDonationClick = () => {
 
@@ -133,10 +146,15 @@ function Contents() {
                 </div>
 
                 <div className="w-700 mt-12 m-auto border-t-2 border-b-2 text-center pt-14 pl-0 pr-0 pb-14">
-                    <span className="block text-green-600 text-4xl text-ellipsis whitespace-nowrap leading-80">{fundrasingMoney}<span className="text-2xl">원</span></span>
-                    <span className="text-base text-black">{targetPrice}원 목표</span>
-                    <h1>직접기부</h1>
-                    <h1>참여기부</h1>
+                    <span className="block text-green-600 text-4xl text-ellipsis whitespace-nowrap leading-80">{fundrasingMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="text-2xl">원</span></span>
+                    <span className="text-lg text-black">{targetPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원 목표</span>
+                    <span className="text-base block">직접기부 : 0원
+                        <span className="block text-center text-sm">직접기부자 명단</span>
+                    </span>
+                    <span className="text-base block">참여기부 : {((support * 100) + (comments.length * 100)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
+                        <span className="block text-center text-sm">응원 : {(support * 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</span>
+                        <span className="block text-center text-sm">댓글 : {(comments.length * 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</span>
+                    </span>
                 </div>
                 
                 {/* 프로젝트팀 */}
@@ -167,6 +185,7 @@ function Contents() {
                             <Comments 
                                 key={comment.id}
                                 comments = {comment}
+                                projectId={location.pathname.substring(9)}
                             />
                         );
                     })}
@@ -180,11 +199,11 @@ function Contents() {
                 </div>
 
                 {/* 응원하기 하단 바 */}
-                <div className="z-100 fixed block left-1/2 bottom-2 w-700 h-14 -ml-350 bg-none" id="fund_float">
-                    <button onClick={onSupportClick} className="float-left overflow-hidden relative w-1/3 h-14 leading-60 bg-[#434343] rounded-l-md cursor-pointer" >
-                        <span className="inline-block w-6 h-5 mt-5 mr-2 mb-0 ml-16 float-left"><img className="w-full" src="/img/ico_cheer.svg" /></span>
-                        <span className="inline-block mt-3.5 text-xl text-[#fff] align-baseline float-left">응원</span>
-                        <span onChange={onSupportChange} className="ml-2 inline-block text-base text-[#d9d9d9] mt-0">{supprot}</span>
+                <div className="z-100 fixed block left-1/2 bottom-2 w-700 h-14 -ml-350 bg-none text-center" id="fund_float">
+                    <button disabled="" onClick={onSupportClick} className="float-left overflow-hidden relative w-1/3 h-14 leading-60 bg-[#434343] rounded-l-md cursor-pointer" >
+                        <span className="inline-block w-6 h-5 mt-5 mr-3 mb-0 ml-16 float-left"><img className="w-full" src="/img/ico_cheer.svg" /></span>
+                        <span className="inline-block mt-3.5 text-xl text-[#fff] align-baseline float-left mr-1">응원</span>
+                        <span  className="ml-0 inline-block text-base text-[#d9d9d9] mt-0 mr-16">{support}</span>
                         <div className="absolute top-2 right-0 w-01 h-9 bg-[#555]"></div>
                     </button>
                     

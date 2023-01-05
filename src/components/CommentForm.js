@@ -33,7 +33,7 @@ function CommentForm({money, projectId}) {
                 <div className="inner_write w-700 mt-5 mb-0 m-auto pr-0 pl-0">
                     <div className="mb-4 pl-0 pb-2 text-base border-b-2 ">
                         <span className="txt_heading mr-01">Don 지원 댓글 기부금</span>
-                        <span className="ml-1.5 text-green-600">{money}원</span>
+                        <span className="ml-1.5 text-green-600">{money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</span>
                     </div>
                     <div className="cmt_info ml-0 relative -top-2">
                         <div className="txt_cmt block relative mt-1 pt-3 pl-3 pr-3 pb-4 border-none rounded-lg text-[#444] text-base bg-[#f7f8f9] ">

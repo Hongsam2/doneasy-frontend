@@ -12,6 +12,7 @@ function Contents() {
     const [contents, setContents] = useState([]);
     const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState("");
+    const [titleImage, setTitleImage] = useState("");
     const [organization, setOrganization] = useState("");
     const [targetPrice, setTargetPrice] = useState(0);
     const [createdDate, setCreatedDate] = useState("");
@@ -60,6 +61,7 @@ function Contents() {
                 })
                 setContents(list);
                 setLoading(true);
+                setTitleImage(response.data[0].image);
             })
             .catch((error) => {
                 console.log(error);
@@ -94,7 +96,7 @@ function Contents() {
                 console.log(response);
                 console.log(support);
                 setSupport(support + 1)
-                window.location.reload();
+                
                 
             })
             .catch((error) => {
@@ -105,7 +107,7 @@ function Contents() {
     };
 
     const onDonationClick = () => {
-
+        axios.post("/v1/payment/ready")
     };
 
     return (
@@ -130,7 +132,7 @@ function Contents() {
                             <span className="block w-620 max-h-14 mt-0 m-auto pt-2 text-lg text-white opacity-60">by {organization}</span>
                         </div>
                     </div>
-                    <div className="w-full h-full bg-cover bg-[#3b3820] bg-test-img"></div>
+                    <img src={`data:image/*;base64,${titleImage}`} alt="titleImage" className="w-full h-full bg-cover"></img>
                 </div>
 
                 {/* Body Content */}

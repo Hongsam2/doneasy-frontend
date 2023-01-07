@@ -23,6 +23,9 @@ function Contents() {
     const [comments, setComments] = useState([]);
     const [commentLoading, setCommentLoading] = useState(false);
     const [support, setSupport] = useState(0);
+    const [donator, setDonator] = useState("");
+    const [donation, setDonation] = useState(0);
+
     const location = useLocation();
 
     console.log(location)
@@ -30,8 +33,8 @@ function Contents() {
     
     useEffect(() => {
         setCommentLoading(true);
-        setFundrasingMoney((comments.length * 100) + (support * 100));
-    }, [comments, support]);
+        setFundrasingMoney((donation) + (comments.length * 100) + (support * 100));
+    }, [comments, support, donation]);
     
     useEffect(() => {
         const projectId = location.pathname.substring(9)
@@ -85,9 +88,21 @@ function Contents() {
                 console.log(error);
             })
         
+        axios.post("http://localhost:8080/donation-of-project/get-donation", formData)
+            .then((response) => {
+                console.log(response);
+                const donationList = response.data;
+                setDonator(donationList.memberId);
+                setDonation(donationList.price);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        
         
     }, []);
-
+    console.log(donator);
+    console.log(donation)
     const onSupportClick = () => {
         
         const project_id = Number.parseInt(location.pathname.substring(9))
@@ -107,13 +122,15 @@ function Contents() {
     };
 
     const onDonationClick = () => {
-        {/*
-        const headers = {
-            Authorization: KakaoAK + f574c7e87334cd77a430dc7101009266,
-            Content-type: application/x-www-form-urlencoded;charset=utf-8
-        }
-        axios.post("kapi/kakao.com/v1/payment/ready")
-        */}
+        
+        axios.post("http://localhost:8080/donation-of-project/pay")
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        
     }; 
 
     return (
@@ -157,7 +174,7 @@ function Contents() {
                     <span className="block text-green-600 text-4xl text-ellipsis whitespace-nowrap leading-10">{fundrasingMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="text-2xl">원</span></span>
                     <span className="pt-0 text-lg text-black">{targetPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원 목표</span>
                     <span className="mt-2 text-base block">직접기부 : 0원
-                        <span className="block text-center text-sm">직접기부자 명단</span>
+                        <span className="block text-center text-sm">{donator} : {donation}원 감사합니다♡</span>
                     </span>
                     <span className="mt-2 text-base block">참여기부 : {((support * 100) + (comments.length * 100)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
                         <span className="block text-center text-sm">응원 : {(support * 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</span>

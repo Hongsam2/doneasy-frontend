@@ -21,6 +21,8 @@ function ProjectReview() {
     const [comments, setComments] = useState([]);
     const [commentLoading, setCommentLoading] = useState(false);
     const [support, setSupport] = useState(0);
+    const [donator, setDonator] = useState("");
+    const [donation, setDonation] = useState(0);
     const location = useLocation();
     console.log(location);
 
@@ -77,7 +79,18 @@ function ProjectReview() {
             .catch((error) => {
                 console.log(error);
             })
+
+        axios.post("http://localhost:8080/project-review/get-donation", formData)
+            .then((response) => {
+                console.log(response);
+                setDonator(response.data.memberId);
+                setDonation(response.data.price);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }, []);
+    console.log(fundrasingMoney);
 
     return (
         <>
@@ -144,7 +157,7 @@ function ProjectReview() {
                             <Comments 
                                 key={comment.id}
                                 comments = {comment}
-                                projectId={location.pathname.substring(16)}
+                                projectId={location.pathname.substring(9)}
                             />
                         );
                     })}

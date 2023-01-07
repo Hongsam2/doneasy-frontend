@@ -1,6 +1,7 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Project from './routes/Project';
+import ProjectReview from './routes/ProjectReview';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Routes>
         <Route path={'/'} element={<Project/>}/>
         <Route path='/project/:projectId' element={<Project/>}/>
+        <Route path='/project-review/:projectId' element={<ProjectReview />}/>
       </Routes>
     </BrowserRouter>
   );

@@ -23,6 +23,7 @@ function Contents() {
     const [comments, setComments] = useState([]);
     const [commentLoading, setCommentLoading] = useState(false);
     const [support, setSupport] = useState(0);
+    const [donationList, setDonationList] = useState([]);
     const [donator, setDonator] = useState("");
     const [donation, setDonation] = useState(0);
 
@@ -34,6 +35,8 @@ function Contents() {
     useEffect(() => {
         setCommentLoading(true);
         setFundrasingMoney((donation) + (comments.length * 100) + (support * 100));
+        setDonator(donationList.memberId);
+        setDonation(donationList.price);
     }, [comments, support, donation]);
     
     useEffect(() => {
@@ -91,9 +94,11 @@ function Contents() {
         axios.post("http://localhost:8080/donation-of-project/get-donation", formData)
             .then((response) => {
                 console.log(response);
-                const donationList = response.data;
-                setDonator(donationList.memberId);
-                setDonation(donationList.price);
+                setDonationList(response.data);
+                donationList.sort((a, b) => {
+                    return a.id - b.id;
+                })
+                
             })
             .catch((error) => {
                 console.log(error);

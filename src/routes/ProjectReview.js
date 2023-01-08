@@ -21,14 +21,40 @@ function ProjectReview() {
     const [comments, setComments] = useState([]);
     const [commentLoading, setCommentLoading] = useState(false);
     const [support, setSupport] = useState(0);
-    const [donator, setDonator] = useState("");
-    const [donation, setDonation] = useState(0);
+    const [donationList, setDonationList] = useState([]);
+    const [donator, setDonator] = useState([]);
+    const [donation, setDonation] = useState([]);
     const location = useLocation();
     console.log(location);
 
     useEffect(() => {
+        
+        const dList = []
+        const pList = []
+        for(let i = 0; i < donationList.length; i ++) {
+            dList.push(donationList[i].memberId)
+            pList.push(donationList[i].price)
+        }
+        console.log(dList)
+        console.log(pList)
+        setDonator(dList);
+        setDonation(pList);
+
+    }, [donationList])
+    
+
+    useEffect(() => {
+        let donationPrice = 0;
+        donation.forEach((element) => {
+            donationPrice += element;
+
+        });
+        console.log(donationPrice);
         setCommentLoading(true);
-        setFundrasingMoney((comments.length * 100) + (support * 100));
+        setFundrasingMoney((donationPrice) + (comments.length * 100) + (support * 100));
+    }, [comments, support, donation]);
+
+    useEffect(() => {
         const projectId = location.pathname.substring(16)
         const formData =  new FormData();
         formData.append("id", projectId);
@@ -83,8 +109,10 @@ function ProjectReview() {
         axios.post("http://localhost:8080/project-review/get-donation", formData)
             .then((response) => {
                 console.log(response);
-                setDonator(response.data.memberId);
-                setDonation(response.data.price);
+                setDonationList(response.data);
+                donationList.sort((a, b) => {
+                    return a.id - b.id;
+                })
             })
             .catch((error) => {
                 console.log(error);

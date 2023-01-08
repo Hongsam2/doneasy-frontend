@@ -7,6 +7,7 @@ import Comments from "../components/Comments";
 import ContentOfProject from "../components/ContentOfProject";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
+import Modal from "../components/modal/Modal";
 
 function Contents() {
     const [contents, setContents] = useState([]);
@@ -24,19 +25,39 @@ function Contents() {
     const [commentLoading, setCommentLoading] = useState(false);
     const [support, setSupport] = useState(0);
     const [donationList, setDonationList] = useState([]);
-    const [donator, setDonator] = useState("");
-    const [donation, setDonation] = useState(0);
-
+    const [donator, setDonator] = useState([]);
+    const [donation, setDonation] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
     const location = useLocation();
 
     console.log(location)
     console.log(comments);
-    
+
     useEffect(() => {
+        
+        const dList = []
+        const pList = []
+        for(let i = 0; i < donationList.length; i ++) {
+            dList.push(donationList[i].memberId)
+            pList.push(donationList[i].price)
+        }
+        console.log(dList)
+        console.log(pList)
+        setDonator(dList);
+        setDonation(pList);
+
+    }, [donationList])
+    
+
+    useEffect(() => {
+        let donationPrice = 0;
+        donation.forEach((element) => {
+            donationPrice += element;
+
+        });
+        console.log(donationPrice);
         setCommentLoading(true);
-        setFundrasingMoney((donation) + (comments.length * 100) + (support * 100));
-        setDonator(donationList.memberId);
-        setDonation(donationList.price);
+        setFundrasingMoney((donationPrice) + (comments.length * 100) + (support * 100));
     }, [comments, support, donation]);
     
     useEffect(() => {
@@ -106,8 +127,7 @@ function Contents() {
         
         
     }, []);
-    console.log(donator);
-    console.log(donation)
+
     const onSupportClick = () => {
         
         const project_id = Number.parseInt(location.pathname.substring(9))
@@ -126,17 +146,12 @@ function Contents() {
             
     };
 
-    const onDonationClick = () => {
-        
-        axios.post("http://localhost:8080/donation-of-project/pay")
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        
-    }; 
+    const openModal = () => {
+        setModalOpen(true);
+    };
+
+
+    
 
     return (
         <>
@@ -237,9 +252,11 @@ function Contents() {
                         <div className="absolute top-2 right-0 w-01 h-9 bg-[#555]"></div>
                     </button>
                     
-                    <button onClick={onDonationClick} className="float-left overflow-hidden relative w-2/3 h-14 leading-60 bg-green-600 rounded-r-md cursor-pointer text-center">
+                    
+                    <button onClick={openModal} className="float-left overflow-hidden relative w-2/3 h-14 leading-60 bg-green-600 rounded-r-md cursor-pointer text-center">
                         <span className="inline-block text-xl text-[#fff] align-baseline">기부하기</span>
                     </button>
+                    {modalOpen && <Modal setModalOpen={setModalOpen} />}
                 </div>
             </div>
             <Footer id="footer"/>

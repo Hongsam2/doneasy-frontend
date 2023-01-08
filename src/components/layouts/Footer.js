@@ -9,19 +9,19 @@ function Footer() {
         </a>
         <ul className="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
             <div>
-                <a className="mr-4 md:mr-6 ">A sponsoring</a>
+                <a className="mr-4 md:mr-6 ">a sponsoring</a>
             </div>
             <li>
-                <a href="/" className="mr-4 hover:underline md:mr-6 ">SAMSUNG</a>
+                <a href="https://www.samsung.com/sec/" className="mr-4 hover:underline md:mr-6 ">SAMSUNG</a>
             </li>
             <li>
-                <a href="/" className="mr-4 hover:underline md:mr-6">LG</a>
+                <a href="https://www.lg.co.kr/" className="mr-4 hover:underline md:mr-6">LG</a>
             </li>
             <li>
-                <a href="/" className="mr-4 hover:underline md:mr-6 ">BINCH</a>
+                <a href="https://www.apple.com/kr/" className="mr-4 hover:underline md:mr-6 ">APPLE</a>
             </li>
             <li>
-                <a href="/" className="hover:underline">KINDER</a>
+                <a href="https://www.kinder.com/kr/ko/" className="hover:underline">KINDER</a>
             </li>
         </ul>
     </div>

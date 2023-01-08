@@ -1,7 +1,7 @@
 function Notice() {
     return (
         <>
-        <body className='bg-gray-50'>
+        <div className='bg-gray-50 py-12'>
             <div className=" w-1/2 mx-auto">
                 <div className="my-4">
                     <div className="bg-white border shadow-md mx-auto mt-12 mb-12 rounded-2xl">
@@ -11,7 +11,7 @@ function Notice() {
                     </div>
                 </div>
             </div>
-            </body>
+            </div>
         </>
     )
 }

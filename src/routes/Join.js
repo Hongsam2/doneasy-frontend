@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 function Join() {
     return (
         <>
+        <div className="bg-gray-50 py-12">
         <div className="text-center">
         <div className="font-extrabold text-green-700 text-2xl mt-12" > Welcome! </div>
         <div> Doneasy에 오신것을 환영합니다. </div>
@@ -15,6 +16,7 @@ function Join() {
                     <img className="object-center " src="/img/people.png"></img>
                     </Link>
             </ul>
+        </div>
         </div>
         </div>
         </>

@@ -1,8 +1,8 @@
 const Main = () => {
     return (
         <>
-        <body className='bg-gray-50'>
-            <div className=" w-11/12 mx-auto">
+        <div className='bg-gray-50 py-12 font-kakao'>
+            <div className=" w-11/12 mx-auto font-kakao">
                 <div className="my-4">
                     <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-6 lg:mt-0">
                     <div className="w-1/5">
@@ -25,7 +25,10 @@ const Main = () => {
                     <div className="flex flex-col font-medium lg:flex-row lg:space-x-6 lg:mt-0 bg-white border shadow-md mb-6 rounded-2xl w-3/4">
                         <div className='w-1/2'><img src='/img/give.jpg' className="rounded-l-2xl"></img>
                         </div>
-                        <div>내용 내용</div>
+                        <div className="mx-6 my-6">
+                        <div className="text-2xl font-bold mb-4">WELCOME TO DONEASY!</div>
+                        <div>당신의 소중한 참여를 기다립니다.</div>
+                        </div>
                     </div>
                     <div className="bg-white border shadow-md mb-6 rounded-2xl w-1/4">
                         여기다가 뭐넣지
@@ -35,14 +38,19 @@ const Main = () => {
                     <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-6 lg:mt-0">
                     <div className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-6 lg:mt-0 bg-white border shadow-md mb-12 rounded-2xl w-3/4">
                         <div className='w-1/2'><img src='/img/hand.jpg' className="rounded-l-2xl"></img></div>
-                        <div>내용 내용</div>
+                        <div className="mx-6 my-6">
+                            <div className="text-2xl font-bold mb-4">DONEASY 기부 방법</div>
+                            <div>직접 기부 : 후원금을 직접 결제합니다.</div>
+                            <div>참여 기부 : 기부 프로그램에 응원과 댓글을 남겨주시면 </div>
+                            <div>후원 기업의 지원금으로 100원씩 기부됩니다.</div>
+                        </div>
                     </div>
                     <div className="bg-white border shadow-md mb-12 rounded-2xl w-1/4">여기다가 뭐넣지</div>
                     </ul>
                     
                 </div>
             </div>
-            </body>
+            </div>
         </>
     )
 }

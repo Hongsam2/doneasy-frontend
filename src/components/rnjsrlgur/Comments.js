@@ -40,7 +40,7 @@ function Comments({comments, projectId}) {
                     <div className="cmt_info relative -top-2">
                         <span className="info_append pl-1 block" >
                             <span className="font-normal text-base">{member}</span>
-                            <span className="text-green-600 relative text-sm pr-1 ml-1.5">100원</span>
+                            <span className="text-green-600 relative text-sm pr-1 ml-1.5">100원aa</span>
                         </span>
                         <span className="block mt-1 pt-3.5 pl-3 pr-3 pb-3.5 rounded-lg bg-[#fafafa] break-words break-all ">
                             <span className="block leading-6 whitespace-pre-line">{comment}<span className="text-red-600 font-semibold"> ღ’ᴗ’ღ</span></span>

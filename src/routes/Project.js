@@ -7,7 +7,6 @@ import Comments from "../components/Comments";
 import ContentOfProject from "../components/ContentOfProject";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
-import Modal from "../components/modal/Modal";
 
 function Contents() {
     const [contents, setContents] = useState([]);
@@ -27,14 +26,13 @@ function Contents() {
     const [donationList, setDonationList] = useState([]);
     const [donator, setDonator] = useState([]);
     const [donation, setDonation] = useState([]);
-    const [modalOpen, setModalOpen] = useState(false);
+    const [donationMoney, setDonationMoney] = useState(0);
     const location = useLocation();
-
+    
     console.log(location)
     console.log(comments);
 
     useEffect(() => {
-        
         const dList = []
         const pList = []
         for(let i = 0; i < donationList.length; i ++) {
@@ -53,9 +51,9 @@ function Contents() {
         let donationPrice = 0;
         donation.forEach((element) => {
             donationPrice += element;
-
         });
         console.log(donationPrice);
+        setDonationMoney(donationPrice);
         setCommentLoading(true);
         setFundrasingMoney((donationPrice) + (comments.length * 100) + (support * 100));
     }, [comments, support, donation]);
@@ -146,9 +144,43 @@ function Contents() {
             
     };
 
-    const openModal = () => {
-        setModalOpen(true);
-    };
+    const onDonationClick = () => {
+        const project_id = Number.parseInt(location.pathname.substring(9))
+
+        const state = {
+            next_redirect_pc_url: "",
+            tid: "",
+            payInfo: {
+                cid: "TC0ONETIME",
+                partner_order_id: "partner_order_id",
+                partner_user_id: "partner_user_id",
+                item_name: "donation",
+                quantity: 1,
+                total_amount: 1000,
+                tax_free_amount: 0,
+                approval_url: "http://localhost:8080/project/1",
+                fail_url:"http://localhost:8080/project/1",
+                cancel_url:"http://localhost:8080/project/1",
+            },
+        };
+
+        const {payInfo} = state;
+        console.log(payInfo)
+        axios({
+            url: '/api/v1/payment/ready',
+            method: "POST",
+            headers: {
+                Authorization: "KakaoAK f574c7e87334cd77a430dc7101009266",
+                "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+            },
+            payInfo
+        }).then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
 
 
     
@@ -193,8 +225,8 @@ function Contents() {
                 <div className="w-700 mt-12 m-auto border-t-2 border-b-2 text-center pt-14 pl-0 pr-0 pb-14">
                     <span className="block text-green-600 text-4xl text-ellipsis whitespace-nowrap leading-10">{fundrasingMoney.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="text-2xl">원</span></span>
                     <span className="pt-0 text-lg text-black">{targetPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원 목표</span>
-                    <span className="mt-2 text-base block">직접기부 : 0원
-                        <span className="block text-center text-sm">{donator} : {donation}원 감사합니다♡</span>
+                    <span className="mt-2 text-base block">직접기부 : {donationMoney}원
+                        <span className="block text-center text-sm">감사합니다♡</span>
                     </span>
                     <span className="mt-2 text-base block">참여기부 : {((support * 100) + (comments.length * 100)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
                         <span className="block text-center text-sm">응원 : {(support * 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</span>
@@ -253,10 +285,9 @@ function Contents() {
                     </button>
                     
                     
-                    <button onClick={openModal} className="float-left overflow-hidden relative w-2/3 h-14 leading-60 bg-green-600 rounded-r-md cursor-pointer text-center">
+                    <button onClick={onDonationClick} className="float-left overflow-hidden relative w-2/3 h-14 leading-60 bg-green-600 rounded-r-md cursor-pointer text-center">
                         <span className="inline-block text-xl text-[#fff] align-baseline">기부하기</span>
                     </button>
-                    {modalOpen && <Modal setModalOpen={setModalOpen} />}
                 </div>
             </div>
             <Footer id="footer"/>

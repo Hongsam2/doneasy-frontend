@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import ContentOfProject from "../components/ContentOfProject";
-import Comments from "../components/Comments";
-import Footer from "../components/layout/Footer";
-import Header from "../components/layout/Header";
+import ContentOfProject from "../../components/rnjsrlgur/ContentOfProject";
+import Comments from "../../components/rnjsrlgur/Comments";
+import Footer from "../../components/rnjsrlgur/layout/Footer";
+import Header from "../../components/rnjsrlgur/layout/Header";
 
 function ProjectReview() {
     const [contents, setContents] = useState([]);

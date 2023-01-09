@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import CommentForm from "../components/CommentForm";
+import CommentForm from "../../components/rnjsrlgur/CommentForm";
 
-import Comments from "../components/Comments";
-import ContentOfProject from "../components/ContentOfProject";
-import Footer from "../components/layout/Footer";
-import Header from "../components/layout/Header";
+import Comments from "../../components/rnjsrlgur/Comments";
+import ContentOfProject from "../../components/rnjsrlgur/ContentOfProject";
+import Footer from "../../components/rnjsrlgur/layout/Footer";
+import Header from "../../components/rnjsrlgur/layout/Header";
 
 function Contents() {
     const [contents, setContents] = useState([]);

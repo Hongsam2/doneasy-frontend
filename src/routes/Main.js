@@ -2,8 +2,47 @@ import { Link } from "react-router-dom"
 import TodayTimeFormal from "../components/TodayTimeFormal"
 import TodayFormal from "../components/TodayFormal"
 import Weather from "../components/Weather"
+import axios from "axios"
+import { useEffect, useState } from "react"
 
-const Main = () => {
+function Main() {
+    const [price, setPrice] = useState([]);
+    const [priceList, setPriceList] = useState([]);
+    const [priceCount, setPriceCount] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    useEffect(()=> {
+        const pList = []
+        for (let index = 0; index < price.length; index++) {
+            pList.push(price[index].price);   
+        }
+        setPriceList(pList);
+        setPriceCount(price.length);
+    }, [price])
+
+    useEffect(() => {
+        let donationPrice = 0;
+        priceList.forEach((element) => {
+            donationPrice += element;
+        })
+        console.log(donationPrice);
+        setTotalPrice(donationPrice);
+    }, [priceList]) 
+
+
+    useEffect(()=> {
+        axios.post("http://localhost:8080/donation-of-project/get-donation")
+    .then((response) => {
+        console.log(response)
+        setPrice(response.data)
+        
+    }).catch((error) => {
+        console.log(error)
+    })
+
+    }, [])
+    
+
     return (
         <>
         <div className='bg-gray-50 py-12 font-kakao'>
@@ -19,7 +58,7 @@ const Main = () => {
 
                         <div className='m-auto pr-0 w-full py-6 flex flex-col mt-4 font-medium lg:flex-row lg:space-x-6 lg:mt-0'>
                             <img alt='' src="https://t1.kakaocdn.net/together_image/common/ico_home_donation.png" className='h-16 ml-auto mt-6 flex items-center'></img>
-                            <div className="font-bold  text-gray-400 mt-4 bg-white text-xl text-center border-2 rounded-full w-1/4 py-6">기부 123,456건</div>
+                            <div className="font-bold  text-gray-400 mt-4 bg-white text-xl text-center border-2 rounded-full w-1/4 py-6">기부 {priceCount}건</div>
                             <img alt='' src="https://t1.kakaocdn.net/together_image/common/bg_home_hands.png" className='h-16 ml-auto mt-6 flex items-center rounded-full'></img>
                             <img alt='' src="https://t1.kakaocdn.net/together_image/common/ico_action_people.png" className='h-16 ml-auto mt-6 flex items-center'></img>
                             <a href="./routes/Intro" className="mr-2 font-bold text-gray-400 mt-4 bg-white float-right text-xl text-center border-2 rounded-full w-1/4 py-6">DONEASY 소개</a>
@@ -48,7 +87,7 @@ const Main = () => {
                             src="https://t1.kakaocdn.net/together_image/common/ico_won.png"></img>
                             <p className="text-xl">총 기부금</p>
                             </ul>
-                            <p className="mx-6 mt-2 text-2xl text-right underline">123,456,789 원</p>
+                            <p className="mx-6 mt-2 text-2xl text-right underline">{totalPrice}원</p>
                             <p className="font-xm text-center py-2 text-yellow-600">♥ THANK YOU ♥</p>
                         </div>
                         </div>

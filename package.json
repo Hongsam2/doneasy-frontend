@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "doneasy-frontend",
+=======
+  "name": "doneasy",
+>>>>>>> 8c13d5246880f39b8c29f00e21483e67de371fb7
   "version": "0.1.0",
   "private": true,
   "dependencies": {

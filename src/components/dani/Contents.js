@@ -166,7 +166,7 @@ function Contents({ changeContents }) {
           value={subtitle}
           id="subTitle"
           onChange={onSubTitle}
-          placeholder="부제목을 입력하세요."
+          placeholder="부제목을 입력하세요HIHI."
         />
       </div>
       <div className="flex items-center border-2 mb-6 py-2 px-3 rounded-2xl ">

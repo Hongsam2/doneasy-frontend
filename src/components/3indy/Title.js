@@ -4,7 +4,7 @@ function Title() {
     return(
         <>
         <div className="py-12">
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-12 lg:mt-0 bg-gray-50 w-1/2 mx-auto px-12">
+            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-12 lg:mt-0 w-1/2 mx-auto px-12">
                 <Link to={"/"}>
                 <div className="text-center">
                     <img alt='' src="https://t1.kakaocdn.net/together_image/ico_all_221018.png" className="w-12 h-12"></img>

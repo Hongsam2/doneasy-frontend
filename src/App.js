@@ -11,6 +11,7 @@ import Intro from './routes/Intro';
 import Search from './routes/Search';
 import MyPage from './routes/MyPage';
 import GroupPage from './routes/GroupPage';
+import Donation from './routes/Donation';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/routes/Search" element={<Search/>}></Route>
         <Route path="/routes/MyPage" element={<MyPage/>}></Route>
         <Route path="/routes/GroupPage" element={<GroupPage/>}></Route>
+        <Route path='/routes/Donation' element={<Donation/>}></Route>
       </Routes>
       <Footer/>
       </BrowserRouter>

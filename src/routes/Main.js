@@ -87,7 +87,7 @@ function Main() {
                             src="https://t1.kakaocdn.net/together_image/common/ico_won.png"></img>
                             <p className="text-xl">총 기부금</p>
                             </ul>
-                            <p className="mx-6 mt-2 text-2xl text-right underline">{totalPrice}원</p>
+                            <p className="mx-6 mt-2 text-2xl text-right underline">{totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</p>
                             <p className="font-xm text-center py-2 text-yellow-600">♥ THANK YOU ♥</p>
                         </div>
                         </div>

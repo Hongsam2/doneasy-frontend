@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import ModifyContent from '../components/admin/notice/modify/ModifyContent';
-import Sidebar from '../components/Sidebar';
+import ModifyContent from '../../components/admin/notice/modify/ModifyContent';
+import Sidebar from '../../components/admin/Sidebar';
 
 //TODO
 function NoticeModify() {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import Sidebar from '../components/Sidebar';
-import SubSidebar from '../components/SubSidebar';
-import ProjectList from '../components/admin/project/ProjectList';
+import Sidebar from '../../components/admin/Sidebar';
+import SubSidebar from '../../components/admin/SubSidebar';
+import ProjectList from '../../components/admin/project/ProjectList';
 import axios from 'axios';
 
 function Project() {

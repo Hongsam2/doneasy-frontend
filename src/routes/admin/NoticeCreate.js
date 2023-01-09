@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Content from '../components/admin/notice/create/Content';
-import Sidebar from '../components/Sidebar';
+import Content from '../../components/admin/notice/create/Content';
+import Sidebar from '../../components/admin/Sidebar';
 
 function NoticeCreate() {
     const [title, setTitle] = useState('');

@@ -1,14 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Notice from './routes/Notice';
-import NoticeCreate from './routes/NoticeCreate';
-import Project from './routes/Project';
-import Comment from './routes/Comment';
-import Admin from './routes/Admin';
-import Campaign from './routes/Campaign';
-import NoticeDetail from './routes/NoticeDetail';
-import ProjectProposal from './routes/ProjectProposal';
-import ProjectProposalDetail from './routes/ProjectProposalDetail';
-import NoticeModify from './routes/NoticeModify';
+import Notice from './routes/admin/Notice';
+import NoticeCreate from './routes/admin/NoticeCreate';
+import Project from './routes/admin/Project';
+import Comment from './routes/admin/Comment';
+import Campaign from './routes/admin/Campaign';
+import NoticeDetail from './routes/admin/NoticeDetail';
+import ProjectProposal from './routes/admin/ProjectProposal';
+import ProjectProposalDetail from './routes/admin/ProjectProposalDetail';
+import NoticeModify from './routes/admin/NoticeModify';
 
 function App() {
     return (

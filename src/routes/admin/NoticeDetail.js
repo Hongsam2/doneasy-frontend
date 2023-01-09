@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import DetailContent from '../components/admin/notice/DetailContent';
-import Sidebar from '../components/Sidebar';
+import DetailContent from '../../components/admin/notice/DetailContent';
+import Sidebar from '../../components/admin/Sidebar';
 
 // Modify ???
 function NoticeDetail() {

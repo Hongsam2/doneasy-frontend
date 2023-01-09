@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import CommentList from '../components/admin/comment/CommentList';
-import Sidebar from '../components/Sidebar';
+import CommentList from '../../components/admin/comment/CommentList';
+import Sidebar from '../../components/admin/Sidebar';
 
 function Comment() {
     const [contents, setContents] = useState([]);
@@ -17,6 +17,27 @@ function Comment() {
             .then((response) => {
                 console.log(response);
                 setContents(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        axios
+            .get('http://localhost:8080/admin/test')
+            .then(async (response) => {
+                console.log(response);
+                const token = 'Bearer ' + response.data;
+                console.log(token);
+                axios
+                    .get('http://localhost:8080/admin/token', {
+                        headers: { Authorization: token },
+                    })
+                    .then((response) => {
+                        console.log(response);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
             })
             .catch((error) => {
                 console.log(error);
@@ -61,7 +82,7 @@ function Comment() {
                                 className="px-4 py-2 mr-8 rounded-lg border bg-gray-50 duration-150 tracking-wider hover:bg-gray-200 hover:duration-150"
                                 onClick={onSortByDateClick}
                             >
-                                날짜순
+                                최신날짜순
                             </button>
                             <button
                                 className="px-4 py-2 rounded-lg border bg-gray-50 duration-150 tracking-wider hover:bg-gray-200 hover:duration-150"

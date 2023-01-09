@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Sidebar from '../components/Sidebar';
-import SubSidebar from '../components/SubSidebar';
+import Sidebar from '../../components/admin/Sidebar';
+import SubSidebar from '../../components/admin/SubSidebar';
 
 function ProjectProposalDetail() {
     const [id, setId] = useState(-1);

@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import List from '../components/admin/notice/List';
-import Sidebar from '../components/Sidebar';
+import List from '../../components/admin/notice/List';
+import Sidebar from '../../components/admin/Sidebar';
 
 function Notice() {
     const [text, setText] = useState('');
@@ -10,14 +10,12 @@ function Notice() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        console.log(postList);
         setLoading(true);
     }, [postList]);
     useEffect(() => {
         axios
             .get('http://localhost:8080/admin/notice')
             .then((response) => {
-                console.log(response);
                 setPostList(response.data);
             })
             .catch((error) => {
@@ -37,7 +35,6 @@ function Notice() {
             axios
                 .get(`http://localhost:8080/admin/notice?s=${text}`)
                 .then((response) => {
-                    console.log(response.data);
                     setPostList(response.data);
                 })
                 .catch((error) => {

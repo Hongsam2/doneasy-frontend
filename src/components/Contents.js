@@ -4,6 +4,7 @@ function Contents({ changeContents }) {
   const [image_name, setImage] = useState("");
   const [image_name2, setImage2] = useState("");
   const [image_name3, setImage3] = useState("");
+  const [pdf, setPdf] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [contents, setContents] = useState("");
   const [subtitle2, setSubtitle2] = useState("");
@@ -15,6 +16,7 @@ function Contents({ changeContents }) {
   const [imageSrc, setImageSrc] = useState("");
   const [imageSrc2, setImageSrc2] = useState("");
   const [imageSrc3, setImageSrc3] = useState("");
+
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [loading3, setLoading3] = useState(false);
@@ -58,8 +60,13 @@ function Contents({ changeContents }) {
     } else {
       list.push(null);
     }
+    if (pdf !== "") {
+      list.push(pdf);
+    } else {
+      list.push(null);
+    }
     setImageList(list);
-  }, [image_name, image_name2, image_name3]);
+  }, [image_name, image_name2, image_name3, pdf]);
 
   useEffect(() => {
     // 변화된 데이터를 객체로 만든다.
@@ -95,6 +102,11 @@ function Contents({ changeContents }) {
     setContext(list);
   }, [subtitle3, contents3]);
 
+  const onPdf = (e) => {
+    setPdf(e.target.files[0]);
+  };
+
+  //미리보기
   const onImage = (e) => {
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
@@ -155,6 +167,15 @@ function Contents({ changeContents }) {
           id="subTitle"
           onChange={onSubTitle}
           placeholder="부제목을 입력하세요."
+        />
+      </div>
+      <div className="flex items-center border-2 mb-6 py-2 px-3 rounded-2xl ">
+        <input
+          className="pl-2 w-full outline-none border-none"
+          type="file"
+          onChange={onPdf}
+          placeholder="pdf file."
+          accept="pdf/*"
         />
       </div>
       <div className=" mx-auto w-full max-w-[600px] bg-white">

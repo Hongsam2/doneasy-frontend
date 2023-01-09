@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
-import TodayFormal from "../components/TodayFormal";
+import TodayFormal from "../../components/3indy/TodayFormal";
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 import { BsDownload } from 'react-icons/bs';

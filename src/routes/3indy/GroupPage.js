@@ -1,7 +1,7 @@
 import axios from "axios";
-import GroupIntro from "../components/GroupIntro";
+import GroupIntro from "../../components/3indy/GroupIntro";
 import { useEffect, useState } from "react";
-import ProjectList from "../components/ProjectList"
+import ProjectList from "../../components/3indy/ProjectList"
 
 function GroupPage() {
 

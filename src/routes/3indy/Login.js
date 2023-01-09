@@ -92,7 +92,7 @@ function Login() {
                 </form>
 
                 <div className="mt-8 text-xs font-light text-center text-gray-700">
-                    <Link to={"/routes/Join"}>
+                    <Link to={"/routes/3indy/Join"}>
                     <div className="mb-6 font-medium text-green-600 hover:underline">
                         JOIN US
                     </div>

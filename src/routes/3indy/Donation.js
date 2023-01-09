@@ -1,4 +1,4 @@
-import Title from "../components/Title";
+import Title from "../../components/3indy/Title";
 
 function Donation() {
     return(

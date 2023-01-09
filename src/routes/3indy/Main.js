@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
-import TodayTimeFormal from "../components/TodayTimeFormal"
-import TodayFormal from "../components/TodayFormal"
-import Weather from "../components/Weather"
+import TodayTimeFormal from "../../components/3indy/TodayTimeFormal"
+import TodayFormal from "../../components/3indy/TodayFormal"
+import Weather from "../../components/3indy/Weather"
 import axios from "axios"
 import { useEffect, useState } from "react"
 
@@ -61,7 +61,7 @@ function Main() {
                             <div className="font-bold  text-gray-400 mt-4 bg-white text-xl text-center border-2 rounded-full w-1/4 py-6">기부 {priceCount}건</div>
                             <img alt='' src="https://t1.kakaocdn.net/together_image/common/bg_home_hands.png" className='h-16 ml-auto mt-6 flex items-center rounded-full'></img>
                             <img alt='' src="https://t1.kakaocdn.net/together_image/common/ico_action_people.png" className='h-16 ml-auto mt-6 flex items-center'></img>
-                            <a href="./routes/Intro" className="mr-2 font-bold text-gray-400 mt-4 bg-white float-right text-xl text-center border-2 rounded-full w-1/4 py-6">DONEASY 소개</a>
+                            <a href="./routes/3indy/Intro" className="mr-2 font-bold text-gray-400 mt-4 bg-white float-right text-xl text-center border-2 rounded-full w-1/4 py-6">DONEASY 소개</a>
                         </div>
                     </ul>
 

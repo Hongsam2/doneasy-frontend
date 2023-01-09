@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ProjectProposal from "./routes/ProjectProposal";
-import ContentsOfProjectReview from "./routes/ContentOfProjectReview";
+import ProjectProposal from "./routes/dani/ProjectProposal";
+import ContentsOfProjectReview from "./routes/dani/ContentOfProjectReview";
 
 function App() {
   return (

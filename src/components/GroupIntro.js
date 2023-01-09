@@ -2,7 +2,7 @@ function GroupIntro(props) {
 
     return (
         <>
-        <div className="border shadow-md mx-auto mt-6 rounded-2xl w-11/12 text-center">
+        <div className="border mx-auto mt-6 rounded-2xl w-11/12 text-center">
             <ul className="flex flex-col mt-4 mx-4 font-medium lg:flex-row lg:space-x-2 lg:mt-0 ">
                 <img alt="" src={`data:image/*;base64,${props.image}`} className="rounded-full w-20 h-20 mt-6 mx-2"></img>
                 <div className="mt-12 text-2xl font-bold">{props.groupName}</div>

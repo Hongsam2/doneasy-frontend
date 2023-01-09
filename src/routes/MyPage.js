@@ -48,7 +48,7 @@ function MyPage() {
                 <img alt='프로필' src="https://t1.kakaocdn.net/together_image/common/avatar/avatar03.png"
                 className="h-20 rounded-full mx-8 mt-8"></img>
                 <div className='text-2xl font-extrabold text-center mt-14'>반가워요, </div>
-                <div className='text-2xl text-center mt-14'>{nickname}!</div>
+                <div className='text-2xl text-center mt-14'>{nickname}님!</div>
             </ul>
             <div className="mx-12 mt-2">
                 <button type="button" 
@@ -57,7 +57,7 @@ function MyPage() {
                 </button>
             </div>
 
-            <div className="border shadow-md mx-auto mt-12 mb-6 rounded-2xl w-11/12 flex justify-between bg-white">
+            <div className="border mx-auto mt-12 mb-6 rounded-2xl w-11/12 flex justify-between bg-white">
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-2 lg:mt-0 w-full justify-between mr-8">
             <div className="mx-8 mt-8 mb-8">
                 <div className="text-2xl font-bold">기부내역</div>
@@ -97,7 +97,6 @@ function MyPage() {
             <BsDownload className="ml-auto"/>
             </button>
             </div>
-
             <div className="text-center mt-12 mb-6">
             <button type="button" className="underline text-gray-300 text-sm">회원 탈퇴</button>
             </div>

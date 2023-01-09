@@ -66,7 +66,7 @@ function GroupPage() {
             email = {email}
             image = {image}/>
 
-            <div className="border shadow-md mx-auto mt-6 mb-6 rounded-2xl w-11/12">
+            <div className="border mx-auto mt-6 mb-6 rounded-2xl w-11/12">
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-2 lg:mt-0 w-11/12 mx-auto justify-between">
             <div className="mt-8 mb-8">
                 <div className="text-2xl font-bold">기부 활동</div>
